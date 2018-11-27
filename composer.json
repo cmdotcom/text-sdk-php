@@ -1,0 +1,28 @@
+{
+    "name": "cmdotcom/text-sdk-php",
+    "description": "PHP SDK to send messages with CM.com",
+    "type": "library",
+    "version": "1.0.0",
+    "keywords": ["sms","cm.com","rcs"],
+    "homepage": "https://www.cm.com/products/text/",
+    "authors": [
+        {
+            "name": "Niels Verbaken",
+            "email": "nv@cm.nl",
+            "role": "Developer"
+        }
+    ],
+    "require": {
+        "ext-curl": "*",
+        "ext-json": "*",
+        "php": "^7.0"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "~4.0"
+    },
+    "autoload": {
+        "psr-0": {
+            "CMText": "src/"
+        }
+    }
+}
