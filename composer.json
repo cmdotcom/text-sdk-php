@@ -5,6 +5,7 @@
     "version": "1.0.0",
     "keywords": ["sms","cm.com","rcs"],
     "homepage": "https://www.cm.com/products/text/",
+    "license": "MIT",
     "authors": [
         {
             "name": "Niels Verbaken",
