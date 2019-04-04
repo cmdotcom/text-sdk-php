@@ -29,15 +29,8 @@ class MessageBodyTest extends PHPUnit_Framework_TestCase
         );
 
         // unknown properties should return false
-        $this->assertEquals(
-            false,
+        $this->assertFalse(
             $messageBody->unknownProperty
-        );
-
-        // printing the instance should display the Content
-        $this->assertEquals(
-            $content,
-            strval($messageBody)
         );
     }
 

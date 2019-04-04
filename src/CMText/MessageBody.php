@@ -28,9 +28,9 @@ class MessageBody implements JsonSerializable
      * MessageBody constructor.
      * @param string $content
      */
-    public function __construct(string $content = '')
+    public function __construct(string $content)
     {
-        $this->content = utf8_encode($content);
+        $this->content = $content;
     }
 
 
@@ -47,7 +47,7 @@ class MessageBody implements JsonSerializable
              * message content always as utf8 encoded string
              */
             case 'content':
-                return utf8_decode($this->content);
+                return $this->content;
                 break;
 
             /**
@@ -64,21 +64,12 @@ class MessageBody implements JsonSerializable
 
 
     /**
-     * @return string
-     */
-    public function __toString()
-    {
-        return utf8_decode($this->content);
-    }
-
-
-    /**
      * @return object
      */
     public function jsonSerialize()
     {
         return (object)[
-            'content' => utf8_decode($this->content),
+            'content' => utf8_encode($this->content),
             'type'    => $this->type,
         ];
     }

@@ -104,6 +104,21 @@ class MessageTest extends PHPUnit_Framework_TestCase
 
             next($to);
         }
+
+        // verify Recipient limit is respected
+        try{
+            for ($i = 0; $i < Message::RECIPIENTS_MAXIMUM; ++$i){
+                $new->AddRecipients([
+                    str_pad('00', 13, strval($i))
+                ]);
+            }
+
+        }catch (\Exception $exception){
+            $this->assertInstanceOf(
+                \CMText\Exceptions\RecipientLimitException::class,
+                $exception
+            );
+        }
     }
 
 }
