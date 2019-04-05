@@ -49,12 +49,19 @@ class TextClientTest extends PHPUnit_Framework_TestCase
     }
 
 
+    /**
+     * The Maximum amount of Recipients in a request should be respected
+     */
     public function testRecipientsLimit()
     {
         try{
             $client = new TextClient('your-api-key', 'unavailablehost');
 
-            $recipients = array_fill(0, \CMText\Message::RECIPIENTS_MAXIMUM + 1, '00334455667788');
+            $recipients = array_fill(
+                0,
+                \CMText\Message::RECIPIENTS_MAXIMUM + 1,
+                '00334455667788'
+            );
 
             $client->SendMessage('body-content', 'CM.com', $recipients);
 
@@ -117,6 +124,26 @@ class TextClientTest extends PHPUnit_Framework_TestCase
         $this->assertObjectHasAttribute(
             'richContent',
             $json
+        );
+    }
+
+
+    /**
+     * TextClientResult should return a correct object on a weird response
+     */
+    public function testTextClientResultForWeirdResponses()
+    {
+        // no json content and no content at all should act this way
+        $body = '{[nojson';
+        $result = new \CMText\TextClientResult(418, $body);
+
+        $this->assertEquals(
+            \CMText\TextClientStatusCodes::UNKNOWN,
+            $result->statusCode
+        );
+        $this->assertEquals(
+            $body,
+            $result->statusMessage
         );
     }
 
