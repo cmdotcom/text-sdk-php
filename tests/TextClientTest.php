@@ -75,7 +75,7 @@ class TextClientTest extends PHPUnit_Framework_TestCase
 
 
     /**
-     * The maximum amount of Message objects in a request should be respected
+     * Building a RichContent Message should result in correctly formatted json
      */
     public function testRichMessageBuilding()
     {
@@ -90,11 +90,7 @@ class TextClientTest extends PHPUnit_Framework_TestCase
                         'https://avatars3.githubusercontent.com/u/8234794?s=200&v=4',
                         'image/png'
                     )
-                )
-                ->WithSuggestions([
-                    new \CMText\RichContent\Suggestions\ReplySuggestion('Opt In', 'OK'),
-                    new \CMText\RichContent\Suggestions\ReplySuggestion('Opt Out', 'STOP'),
-                ]);
+                );
 
         }catch (\Exception $exception){
             $message = null;
@@ -118,6 +114,47 @@ class TextClientTest extends PHPUnit_Framework_TestCase
 
         $this->assertObjectHasAttribute(
             'appKey',
+            $json
+        );
+
+        $this->assertObjectHasAttribute(
+            'richContent',
+            $json
+        );
+    }
+
+
+    /**
+     * Building a RichContent Message should result in correctly formatted json
+     */
+    public function testRichMessageBuildingWithSuggestions()
+    {
+        try{
+            $message = new \CMText\Message('Message Text', 'Sender_name', ['Recipient_PhoneNumber']);
+            $message
+                ->WithChannels([\CMText\Channels::RCS])
+                ->WithSuggestions([
+                    new \CMText\RichContent\Suggestions\ReplySuggestion('Opt In', 'OK'),
+                    new \CMText\RichContent\Suggestions\ReplySuggestion('Opt Out', 'STOP'),
+                ]);
+
+        }catch (\Exception $exception){
+            $message = null;
+
+        }
+
+
+        $this->assertInstanceOf(
+            \CMText\Message::class,
+            $message
+        );
+
+        $this->assertJson( json_encode($message) );
+
+        $json = $message->jsonSerialize();
+
+        $this->assertObjectHasAttribute(
+            'allowedChannels',
             $json
         );
 
