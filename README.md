@@ -1,5 +1,5 @@
-[![Build Status](https://travis-ci.com/cmdotcom/text-sdk-php.svg?branch=develop)](https://travis-ci.com/cmdotcom/text-sdk-php)
-[![codecov](https://codecov.io/gh/cmdotcom/text-sdk-php/branch/develop/graph/badge.svg)](https://codecov.io/gh/cmdotcom/text-sdk-php)
+[![Build Status](https://travis-ci.com/cmdotcom/text-sdk-php.svg?branch=master)](https://travis-ci.com/cmdotcom/text-sdk-php)
+[![codecov](https://codecov.io/gh/cmdotcom/text-sdk-php/branch/master/graph/badge.svg)](https://codecov.io/gh/cmdotcom/text-sdk-php)
 
 # CM Text SDK
 A software development kit to provide ways to interact with CM.com's Text service. API used:
