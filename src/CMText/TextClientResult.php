@@ -42,34 +42,17 @@ class TextClientResult
      */
     private function processResponse()
     {
-        // check if the response is a json string
-        if( 0 !== strlen($this->response) ){
-            $this->processJsonResponse();
+        // decode the response
+        $json = json_decode($this->response, false, 5);
+
+        if(null === $json){
+            $this->statusMessage = strlen($this->response) ? substr($this->response, 0, 100) : 'An error occurred';
+            $this->statusCode    = TextClientStatusCodes::UNKNOWN;
 
         }else{
-            $this->statusMessage = substr($this->response, 0, 100);
-            $this->statusCode = TextClientStatusCodes::UNKNOWN;
-        }
-    }
-
-
-    /**
-     * Processes data we received from the gateway, expecting it to be JSON.
-     */
-    private function processJsonResponse()
-    {
-        try {
-            // try to decode the response
-            $json = json_decode($this->response, false, 5);
-
-            //
             $this->statusMessage = $json->details   ?? 'An error occurred';
             $this->statusCode    = $json->errorCode ?? TextClientStatusCodes::UNKNOWN;
             $this->details       = $json->messages  ?? [];
-
-        }catch (\Exception $exception){
-            $this->statusMessage = 'An error occurred';
-            $this->statusCode = TextClientStatusCodes::UNKNOWN;
         }
     }
 

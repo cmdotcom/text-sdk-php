@@ -50,7 +50,32 @@ class TextClientTest extends PHPUnit_Framework_TestCase
 
 
     /**
-     * The maximum amount of Message objects in a request should be respected
+     * The Maximum amount of Recipients in a request should be respected
+     */
+    public function testRecipientsLimit()
+    {
+        try{
+            $client = new TextClient('your-api-key', 'unavailablehost');
+
+            $recipients = array_fill(
+                0,
+                \CMText\Message::RECIPIENTS_MAXIMUM + 1,
+                '00334455667788'
+            );
+
+            $client->SendMessage('body-content', 'CM.com', $recipients);
+
+        }catch (\Exception $exception){
+            $this->assertInstanceOf(
+                \CMText\Exceptions\RecipientLimitException::class,
+                $exception
+            );
+        }
+    }
+
+
+    /**
+     * Building a RichContent Message should result in correctly formatted json
      */
     public function testRichMessageBuilding()
     {
@@ -95,6 +120,67 @@ class TextClientTest extends PHPUnit_Framework_TestCase
         $this->assertObjectHasAttribute(
             'richContent',
             $json
+        );
+    }
+
+
+    /**
+     * Building a RichContent Message should result in correctly formatted json
+     */
+    public function testRichMessageBuildingWithSuggestions()
+    {
+        try{
+            $message = new \CMText\Message('Message Text', 'Sender_name', ['Recipient_PhoneNumber']);
+            $message
+                ->WithChannels([\CMText\Channels::RCS])
+                ->WithSuggestions([
+                    new \CMText\RichContent\Suggestions\ReplySuggestion('Opt In', 'OK'),
+                    new \CMText\RichContent\Suggestions\ReplySuggestion('Opt Out', 'STOP'),
+                ]);
+
+        }catch (\Exception $exception){
+            $message = null;
+
+        }
+
+
+        $this->assertInstanceOf(
+            \CMText\Message::class,
+            $message
+        );
+
+        $this->assertJson( json_encode($message) );
+
+        $json = $message->jsonSerialize();
+
+        $this->assertObjectHasAttribute(
+            'allowedChannels',
+            $json
+        );
+
+        $this->assertObjectHasAttribute(
+            'richContent',
+            $json
+        );
+    }
+
+
+    /**
+     * TextClientResult should return a correct object on a weird response
+     */
+    public function testTextClientResultForWeirdResponses()
+    {
+        // no json content and no content at all should act this way
+        $body = '{[nojson';
+        $result = new \CMText\TextClientResult(418, $body);
+
+        $this->assertEquals(
+            \CMText\TextClientStatusCodes::UNKNOWN,
+            $result->statusCode
+        );
+        $this->assertEquals(
+            $body,
+            $result->statusMessage
         );
     }
 
