@@ -3,6 +3,8 @@
 namespace CMText;
 
 
+use CMText\Exceptions\MessagesLimitException;
+
 /**
  * Class TextClient
  *
@@ -27,9 +29,14 @@ class TextClient
     private $messages = [];
 
     /**
+     * Maximum amount of Message objects allowed per request
+     */
+    const MESSAGES_MAXIMUM = 1000;
+
+    /**
      * SDK Version constant
      */
-    const VERSION = '1.0.0';
+    const VERSION = '1.1.0';
 
 
     /**
@@ -59,7 +66,7 @@ class TextClient
      * @param array $to - Recipient phonenumbers
      * @param string $reference optional
      *
-     * @return TextClientResult|boolean
+     * @return TextClientResult
      */
     public function SendMessage(
         string $message,
@@ -76,7 +83,10 @@ class TextClient
             return self::send();
 
         }catch (\Exception $exception){
-            return false;
+            return new TextClientResult(
+                TextClientStatusCodes::UNKNOWN,
+                json_encode(['details' => $exception->getMessage()])
+            );
         }
     }
 
@@ -87,6 +97,7 @@ class TextClient
      * @param array $messages Array of Message objects
      *
      * @return TextClientResult
+     * @throws \CMText\Exceptions\MessagesLimitException
      */
     public function send(
         array $messages = []
@@ -94,6 +105,10 @@ class TextClient
     {
         // set provided messages
         $this->messages = $messages ?: $this->messages;
+
+        if(count($this->messages) > self::MESSAGES_MAXIMUM){
+            throw new MessagesLimitException('Maximum amount of Message objects exceeded. ('. self::MESSAGES_MAXIMUM .')');
+        }
 
         $requestModel = new TextClientRequest($this->apiKey, $this->messages);
 
@@ -122,7 +137,7 @@ class TextClient
             }
 
         }catch (\Exception $exception){
-            $response = $exception->getMessage();
+            $response = json_encode(['details' => $exception->getMessage()]);
             $statuscode = TextClientStatusCodes::UNKNOWN;
 
         }finally{
