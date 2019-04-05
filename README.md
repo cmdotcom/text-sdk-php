@@ -67,7 +67,11 @@ $message
             'https://avatars3.githubusercontent.com/u/8234794?s=200&v=4',
             'image/png'
         )
-    );
+    )
+    ->WithSuggestions([
+        new ReplySuggestion('Opt In', 'OK'),
+        new ReplySuggestion('Opt Out', 'STOP'),
+    ]);
 $result = $client->send( [$message] );
 ```
 

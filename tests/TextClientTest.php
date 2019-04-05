@@ -49,6 +49,24 @@ class TextClientTest extends PHPUnit_Framework_TestCase
     }
 
 
+    public function testRecipientsLimit()
+    {
+        try{
+            $client = new TextClient('your-api-key', 'unavailablehost');
+
+            $recipients = array_fill(0, \CMText\Message::RECIPIENTS_MAXIMUM + 1, '00334455667788');
+
+            $client->SendMessage('body-content', 'CM.com', $recipients);
+
+        }catch (\Exception $exception){
+            $this->assertInstanceOf(
+                \CMText\Exceptions\RecipientLimitException::class,
+                $exception
+            );
+        }
+    }
+
+
     /**
      * The maximum amount of Message objects in a request should be respected
      */
@@ -65,7 +83,11 @@ class TextClientTest extends PHPUnit_Framework_TestCase
                         'https://avatars3.githubusercontent.com/u/8234794?s=200&v=4',
                         'image/png'
                     )
-                );
+                )
+                ->WithSuggestions([
+                    new \CMText\RichContent\Suggestions\ReplySuggestion('Opt In', 'OK'),
+                    new \CMText\RichContent\Suggestions\ReplySuggestion('Opt Out', 'STOP'),
+                ]);
 
         }catch (\Exception $exception){
             $message = null;

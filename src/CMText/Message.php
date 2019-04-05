@@ -175,7 +175,7 @@ class Message implements JsonSerializable
      * @return $this
      * @throws \CMText\Exceptions\ConversationLimitException
      */
-    public function withRichMessage(IRichMessage $richMessage){
+    public function WithRichMessage(IRichMessage $richMessage){
         if(null === $this->richContent){
             $this->richContent = new RichContent();
         }
@@ -191,7 +191,7 @@ class Message implements JsonSerializable
      * @return $this
      * @throws \CMText\Exceptions\SuggestionsLimitException
      */
-    public function withSuggestions(array $suggestions){
+    public function WithSuggestions(array $suggestions){
         if(null === $this->richContent){
             $this->richContent = new RichContent();
         }
