@@ -239,8 +239,12 @@ class Message implements JsonSerializable
             $return['allowedChannels'] = $this->allowedChannels;
         }
 
+        if( null !== $this->hybridAppKey ){
+            $return['appKey'] = $this->allowedChannels;
+        }
+
         if(null !== $this->richContent){
-            $return['RichContent'] = $this->richContent;
+            $return['richContent'] = $this->richContent;
         }
 
         return (object)$return;

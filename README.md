@@ -59,7 +59,8 @@ By using the `Message` class it is possible to create messages with media for ch
 $client = new TextClient('your-api-key');
 $message = new Message('Message Text', 'Sender_name', ['Recipient_PhoneNumber']);
 $message
-    ->WithAllowedChannels(Channels::WHATSAPP)
+    ->WithChannels([Channels::WHATSAPP])
+    ->WithHybridAppKey('your-secret-hybrid-app-key')
     ->WithRichMessage(
         new MediaMessage(
             'cm.com',
