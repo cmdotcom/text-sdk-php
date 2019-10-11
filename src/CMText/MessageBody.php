@@ -69,8 +69,9 @@ class MessageBody implements JsonSerializable
     public function jsonSerialize()
     {
         return (object)[
-            'content' => utf8_encode($this->content),
-            'type'    => $this->type,
+            'content' => function_exists('mb_convert_encoding') ?
+                mb_convert_encoding($this->content, 'UTF-8', mb_detect_encoding($this->content)) : $this->content,
+            'type' => $this->type,
         ];
     }
 }

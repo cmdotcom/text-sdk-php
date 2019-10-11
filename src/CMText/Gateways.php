@@ -19,6 +19,16 @@ class Gateways
     const GLOBAL = 'https://gw.cmtelecom.com/v1.0/message';
 
     /**
+     * China local gateway
+     */
+    const CN = 'https://gw.cmtelecom.cn/v1.0/message';
+
+    /**
+     * United Kingdom local gateway
+     */
+    const UK = 'https://gw-uk.cmtelecom.com/v1.0/message';
+
+    /**
      * South Africa local gateway
      */
     const ZA = 'https://gw.cmtelecom.co.za/v1.0/message';
