@@ -36,7 +36,7 @@ class TextClient
     /**
      * SDK Version constant
      */
-    const VERSION = '1.1.0';
+    const VERSION = '1.1.3';
 
 
     /**
