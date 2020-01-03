@@ -237,4 +237,85 @@ class RichMessageTest extends PHPUnit_Framework_TestCase
             );
         }
     }
+
+
+    public function testInitializeLocationPush()
+    {
+        $dynamicLocation = new \CMText\RichContent\Common\ViewLocationDynamic(
+            'CM HQ',
+            'Konijnenberg 30, Breda'
+        );
+
+        $this->assertInstanceOf(
+            \CMText\RichContent\Common\ViewLocationBase::class,
+            $dynamicLocation
+        );
+
+        $location = new \CMText\RichContent\Messages\LocationPushMessage( $dynamicLocation );
+
+        $this->assertJson( json_encode($location) );
+
+        $json = json_decode( json_encode($location) );
+
+        $this->assertObjectHasAttribute(
+            'location',
+            $json
+        );
+
+        $this->assertObjectHasAttribute(
+            'label',
+            $json->location
+        );
+        $this->assertObjectHasAttribute(
+            'searchQuery',
+            $json->location
+        );
+        $this->assertObjectNotHasAttribute(
+            'radius',
+            $json->location
+        );
+
+
+
+
+        $staticLocation = new CMText\RichContent\Common\ViewLocationStatic(
+            'CM HQ',
+            '51.603802',
+            '4.770821',
+            3
+        );
+
+        $this->assertInstanceOf(
+            \CMText\RichContent\Common\ViewLocationBase::class,
+            $staticLocation
+        );
+
+        $location = new CMText\RichContent\Messages\LocationPushMessage( $staticLocation );
+
+        $this->assertJson( json_encode($location) );
+
+        $json = json_decode( json_encode($location) );
+
+        $this->assertObjectHasAttribute(
+            'location',
+            $json
+        );
+
+        $this->assertObjectHasAttribute(
+            'latitude',
+            $json->location
+        );
+        $this->assertObjectHasAttribute(
+            'longitude',
+            $json->location
+        );
+        $this->assertObjectHasAttribute(
+            'label',
+            $json->location
+        );
+        $this->assertObjectHasAttribute(
+            'radius',
+            $json->location
+        );
+    }
 }

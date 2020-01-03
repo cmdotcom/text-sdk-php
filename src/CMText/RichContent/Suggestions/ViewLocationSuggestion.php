@@ -2,6 +2,8 @@
 
 namespace CMText\RichContent\Suggestions;
 
+use CMText\RichContent\Common\ViewLocationBase;
+
 /**
  * Class ViewLocationSuggestion
  * @package CMText\RichContent\Suggestions
@@ -15,7 +17,7 @@ class ViewLocationSuggestion extends SuggestionBase
     protected $action = 'viewLocation';
 
     /**
-     * @var \CMText\RichContent\Suggestions\ViewLocationOptions
+     * @var ViewLocationBase
      */
     private $viewLocation;
 
@@ -23,15 +25,15 @@ class ViewLocationSuggestion extends SuggestionBase
     /**
      * ViewLocationSuggestion constructor.
      * @param string $Label
-     * @param \CMText\RichContent\Suggestions\ViewLocationOptions $ViewLocationOptions
+     * @param ViewLocationBase $ViewLocation
      */
     public function __construct(
         string $Label,
-        ViewLocationOptions $ViewLocationOptions
+        ViewLocationBase $ViewLocation
     )
     {
         $this->label = $Label;
-        $this->viewLocation = $ViewLocationOptions;
+        $this->viewLocation = $ViewLocation;
     }
 
 
