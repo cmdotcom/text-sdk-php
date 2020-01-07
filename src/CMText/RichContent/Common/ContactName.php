@@ -69,18 +69,21 @@ class ContactName implements \JsonSerializable
      */
     public function jsonSerialize()
     {
+        $required = [
+            'formatted_name' => $this->formatted,
+        ];
+
+        $optional = array_filter([
+            'first_name' => $this->first,
+            'last_name' => $this->last,
+            'middle_name' => $this->middle,
+            'name_prefix' => $this->prefix,
+            'name_suffix' => $this->suffix,
+        ]);
+
         return (object)array_merge(
-            [
-                // required property
-                'formatted_name' => $this->formatted,
-            ], array_filter([
-                // optional properties
-                'first_name' => $this->first,
-                'last_name' => $this->last,
-                'middle_name' => $this->middle,
-                'name_prefix' => $this->prefix,
-                'name_suffix' => $this->suffix,
-            ])
+            $required,
+            $optional
         );
     }
 }
