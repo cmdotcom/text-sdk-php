@@ -2,7 +2,6 @@
 
 namespace CMText;
 
-use ReflectionClass;
 
 /**
  * Class Channels
@@ -13,7 +12,6 @@ use ReflectionClass;
  */
 class Channels
 {
-
     /**
      * Send SMS messages.
      */
@@ -59,17 +57,4 @@ class Channels
      * @note CM needs to configure this with you.
      */
     const LINE = 'Line';
-
-
-    /**
-     * List available Constants of this class
-     * @return array
-     */
-    static public function getConstants() {
-        try {
-            return (new ReflectionClass(__CLASS__))->getConstants();
-        }catch (\ReflectionException $reflectionException){
-            return [];
-        }
-    }
 }
