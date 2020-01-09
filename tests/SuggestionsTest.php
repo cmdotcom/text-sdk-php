@@ -140,25 +140,23 @@ class SuggestionsTest extends PHPUnit_Framework_TestCase
 
     public function testViewLocationSuggestion()
     {
-        $viewLocation = new \CMText\RichContent\Suggestions\ViewLocationSuggestion(
+        $viewStaticLocation = new \CMText\RichContent\Suggestions\ViewLocationSuggestion(
             'test label',
-            new \CMText\RichContent\Suggestions\ViewLocationOptions(
-                '51.603802',
-                '4.770821',
+            new \CMText\RichContent\Common\ViewLocationStatic(
                 'CM HQ',
-                'Konijnenberg 30, Breda'
+                '51.603802',
+                '4.770821'
             )
         );
 
-
-        $this->assertJson( json_encode($viewLocation) );
+        $this->assertJson( json_encode($viewStaticLocation) );
 
         $this->assertInstanceOf(
             \CMText\RichContent\Suggestions\ViewLocationSuggestion::class,
-            $viewLocation
+            $viewStaticLocation
         );
 
-        $json = json_decode( json_encode($viewLocation) );
+        $json = json_decode( json_encode($viewStaticLocation) );
 
         $this->assertObjectHasAttribute(
             'viewLocation',
@@ -177,8 +175,45 @@ class SuggestionsTest extends PHPUnit_Framework_TestCase
             'label',
             $json->viewLocation
         );
+        $this->assertObjectNotHasAttribute(
+            'radius',
+            $json->viewLocation
+        );
+
+
+        $viewDynamicLocation = new \CMText\RichContent\Suggestions\ViewLocationSuggestion(
+            'test label',
+            new \CMText\RichContent\Common\ViewLocationDynamic(
+                'CM HQ',
+                'Konijnenberg 30, Breda',
+                5
+            )
+        );
+
+        $this->assertJson( json_encode($viewDynamicLocation) );
+
+        $this->assertInstanceOf(
+            \CMText\RichContent\Suggestions\ViewLocationSuggestion::class,
+            $viewDynamicLocation
+        );
+
+        $json = json_decode( json_encode($viewDynamicLocation) );
+
+        $this->assertObjectHasAttribute(
+            'viewLocation',
+            $json
+        );
+
+        $this->assertObjectHasAttribute(
+            'label',
+            $json->viewLocation
+        );
         $this->assertObjectHasAttribute(
             'searchQuery',
+            $json->viewLocation
+        );
+        $this->assertObjectHasAttribute(
+            'radius',
             $json->viewLocation
         );
     }
