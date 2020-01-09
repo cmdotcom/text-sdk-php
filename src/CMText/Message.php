@@ -157,13 +157,11 @@ class Message implements JsonSerializable
     public function WithChannels(array $Channels)
     {
         $supportedChannels = array_intersect(
-            Channels::getConstants(),
+            (new \ReflectionClass(Channels::class))->getConstants(),
             $Channels
         );
 
-        foreach ($supportedChannels as $channel){
-            $this->allowedChannels[] = $channel;
-        }
+        $this->allowedChannels[] = array_values($supportedChannels);
 
         return $this;
     }

@@ -32,6 +32,11 @@ class MessageBodyTest extends PHPUnit_Framework_TestCase
         $this->assertFalse(
             $messageBody->unknownProperty
         );
+
+        // Should be Json Serializable with or without multi-byte-string extension
+        $this->assertJson(
+            json_encode($messageBody)
+        );
     }
 
 }
