@@ -2,8 +2,6 @@
 require __DIR__ .'/../vendor/autoload.php';
 
 
-use CMText\Message;
-
 class RichMessageTest extends PHPUnit_Framework_TestCase
 {
 
@@ -316,6 +314,56 @@ class RichMessageTest extends PHPUnit_Framework_TestCase
         $this->assertObjectHasAttribute(
             'radius',
             $json->location
+        );
+    }
+
+
+    public function testInitializeContactsMessage()
+    {
+        // set up all the Contact properties
+        $contactProperties['address'] = new \CMText\RichContent\Common\ContactAddress('Breda', 'Netherlands', 'NL');
+        $contactProperties['birthday'] = new \CMText\RichContent\Common\ContactBirthday( new DateTime() );
+        $contactProperties['email'] = new \CMText\RichContent\Common\ContactEmail('info@cm.com');
+        $contactProperties['name'] = new \CMText\RichContent\Common\ContactName('CM.com Be part of it.');
+        $contactProperties['organization'] = new \CMText\RichContent\Common\ContactOrganization('CM.com', 'Development');
+        $contactProperties['phonenumber'] = new \CMText\RichContent\Common\ContactPhonenumber('+31765727000');
+        $contactProperties['url'] = new \CMText\RichContent\Common\ContactUrl('https://cm.com');
+
+        // test full initialization
+        $contact = new \CMText\RichContent\Common\Contact(
+            $contactProperties['address'],
+            $contactProperties['birthday'],
+            $contactProperties['email'],
+            $contactProperties['name'],
+            $contactProperties['organization'],
+            $contactProperties['phonenumber'],
+            $contactProperties['url']
+        );
+
+        $contactsMessage = new \CMText\RichContent\Messages\ContactsMessage($contact);
+
+        $this->assertInstanceOf(
+            \CMText\RichContent\Messages\ContactsMessage::class,
+            $contactsMessage
+        );
+
+        $contactsMessage->addContact($contact);
+
+        $this->assertJson( json_encode($contactsMessage) );
+
+        $json = json_decode(json_encode($contactsMessage));
+
+        $this->assertObjectHasAttribute(
+            'contacts',
+            $json
+        );
+        $this->assertCount(
+            2,
+            $json->contacts
+        );
+        $this->assertObjectHasAttribute(
+            'org',
+            $json->contacts[0]
         );
     }
 }
