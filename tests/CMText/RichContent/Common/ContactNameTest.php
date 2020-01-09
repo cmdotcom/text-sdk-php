@@ -27,12 +27,6 @@ class ContactNameTest extends TestCase
         );
     }
 
-    public function testMissingRequiredProperty()
-    {
-        $this->setExpectedException(\ArgumentCountError::class);
-        new ContactName();
-    }
-
     public function testTypeErrorRequiredProperty()
     {
         $this->setExpectedException(\TypeError::class);

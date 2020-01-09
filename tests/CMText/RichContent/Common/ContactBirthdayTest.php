@@ -25,10 +25,4 @@ class ContactBirthdayTest extends TestCase
         $this->setExpectedException(\TypeError::class);
         new ContactBirthday('never');
     }
-
-    public function testArgumentCountError()
-    {
-        $this->setExpectedException(\ArgumentCountError::class);
-        new ContactBirthday();
-    }
 }
