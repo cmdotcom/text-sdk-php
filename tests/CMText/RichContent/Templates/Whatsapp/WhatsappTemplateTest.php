@@ -59,8 +59,8 @@ class WhatsappTemplateTest extends TestCase
                     new \DateTime()
                 ),
                 new LocalizableParamDatetime(
-                    'never',
-                    new \DateTime()
+                    'some time ago',
+                    (new \DateTimeImmutable())->setTimestamp(rand(0, time()))
                 ),
             ]
         );

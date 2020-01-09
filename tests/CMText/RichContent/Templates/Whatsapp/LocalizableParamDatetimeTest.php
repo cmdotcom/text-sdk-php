@@ -21,9 +21,13 @@ class LocalizableParamDatetimeTest extends TestCase
 
     public function testJsonSerialize()
     {
+        $datetime = (new \DateTimeImmutable)->setTimestamp(
+            rand(time(), time()*2)
+        );
+
         $dt = new LocalizableParamDatetime(
-            'right now',
-            new \DateTime()
+            $datetime->format(DATE_COOKIE),
+            $datetime
         );
 
         $this->assertInstanceOf(
@@ -41,9 +45,16 @@ class LocalizableParamDatetimeTest extends TestCase
             (json_decode(json_encode($dt)))->date_time
         );
 
-        $this->assertObjectHasAttribute(
-            'day_of_month',
-            (json_decode(json_encode($dt)))->date_time->component
+        $this->assertArraySubset(
+            [
+                'day_of_week' => $datetime->format('N'),
+                'day_of_month' => $datetime->format('j'),
+                'year' => $datetime->format('Y'),
+                'month' => $datetime->format('n'),
+                'hour' => $datetime->format('H'),
+                'minute' => $datetime->format('i'),
+            ],
+            (array)(json_decode(json_encode($dt)))->date_time->component
         );
     }
 }
