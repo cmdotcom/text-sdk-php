@@ -1,7 +1,7 @@
 <?php
 require __DIR__ .'/../vendor/autoload.php';
 
-
+use CMText\Channels;
 use CMText\Message;
 
 class MessageTest extends PHPUnit_Framework_TestCase
@@ -121,4 +121,27 @@ class MessageTest extends PHPUnit_Framework_TestCase
         }
     }
 
+    /**
+     * Tests if supplied channel is returned properly
+     */
+    public function testAllowedChannel()
+    {
+        $message = new Message();
+        $message->WithChannels([Channels::WHATSAPP]);
+
+        $json = $message->jsonSerialize();
+        $this->assertEquals($json->allowedChannels, [Channels::WHATSAPP]);
+    }
+
+    /**
+     * Tests if supplied channels are returned properly
+     */
+    public function testAllowedChannels()
+    {
+        $message = new Message();
+        $message->WithChannels([Channels::WHATSAPP, Channels::SMS]);
+
+        $json = $message->jsonSerialize();
+        $this->assertEquals($json->allowedChannels, [Channels::SMS, Channels::WHATSAPP]);
+    }
 }

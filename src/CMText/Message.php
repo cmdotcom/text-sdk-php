@@ -161,7 +161,7 @@ class Message implements JsonSerializable
             $Channels
         );
 
-        $this->allowedChannels[] = array_values($supportedChannels);
+        $this->allowedChannels = array_unique(array_merge($this->allowedChannels, array_values($supportedChannels)));
 
         return $this;
     }
