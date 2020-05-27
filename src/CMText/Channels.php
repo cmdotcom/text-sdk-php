@@ -57,4 +57,10 @@ class Channels
      * @note CM needs to configure this with you.
      */
     const LINE = 'Line';
+
+    /**
+     * Send Twitter messages.
+     * @note CM needs to configure this with you.
+     */
+    const TWITTER = 'Twitter';
 }
