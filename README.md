@@ -18,7 +18,7 @@ A software development kit to provide ways to interact with CM.com's Text servic
 Using your unique `ApiKey` (or product token) which authorizes you on the CM platform. Always keep this key secret!
 
 ```php
-$client = new TextClient('your-api-key');
+$client = new \CMText\TextClient('your-api-key');
 ```
 
 ### Send a message
