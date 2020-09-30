@@ -8,7 +8,7 @@ use CMText\RichContent\Templates\TemplateContentBase;
 class TemplateMessage implements IRichMessage
 {
 
-    private $template;
+    public $template;
 
 
     public function __construct(TemplateContentBase $Template)
@@ -21,8 +21,6 @@ class TemplateMessage implements IRichMessage
      */
     public function jsonSerialize()
     {
-        return (object)[
-            'template' => $this->template,
-        ];
+        return $this;
     }
 }

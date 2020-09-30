@@ -4,7 +4,10 @@
 namespace CMText\RichContent\Templates;
 
 
-interface ITemplateContent extends \JsonSerializable
+use CMText\RichContent\Messages\IRichMessage;
+
+
+interface ITemplateContent extends IRichMessage
 {
 
 }

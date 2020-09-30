@@ -5,6 +5,7 @@ namespace CMText;
 
 use CMText\Exceptions\RecipientLimitException;
 use CMText\RichContent\Messages\IRichMessage;
+use CMText\RichContent\Messages\TemplateMessage;
 use CMText\RichContent\RichContent;
 use JsonSerializable;
 
@@ -28,6 +29,7 @@ class Message implements JsonSerializable
 
     /**
      * @var string Sender name
+     * @note Twitter requires the snowflake-id of the account you want to use as sender
      */
     private $from;
 
@@ -38,6 +40,7 @@ class Message implements JsonSerializable
 
     /**
      * @var array List of Recipients
+     * @note Twitter requires the snowflake-id
      */
     private $to = [];
 
@@ -214,6 +217,17 @@ class Message implements JsonSerializable
     }
 
 
+    public function WithTemplate(TemplateMessage $template)
+    {
+        if( !$this->richContent ){
+            $this->richContent = new RichContent();
+        }
+
+        $this->richContent->AddConversationPart($template);
+        return $this;
+    }
+
+
     /**
      * @return object
      */
@@ -222,7 +236,6 @@ class Message implements JsonSerializable
         $return = [
             'body'      => $this->body,
             'from'      => $this->from,
-            'reference' => $this->reference,
             'to'        => array_map(function ($number){
                 return (object)[
                     'number' => $number,
@@ -241,8 +254,12 @@ class Message implements JsonSerializable
             $return['appKey'] = $this->hybridAppKey;
         }
 
-        if(null !== $this->richContent){
+        if( null !== $this->richContent ){
             $return['richContent'] = $this->richContent;
+        }
+
+        if( null !== $this->reference ){
+            $return['reference'] = $this->reference;
         }
 
         return (object)$return;
