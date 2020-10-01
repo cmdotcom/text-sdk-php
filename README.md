@@ -54,7 +54,10 @@ $result = $client->SendMessage('Message_Text', 'CM.com', [ 'Recipient_PhoneNumbe
 }
 ```
 
-## Sending a rich message
+### Status codes
+For all possibly returned status codes, please reference the `TextClientStatusCodes` class.
+
+### Sending a rich message
 By using the `Message` class it is possible to create messages with media for channels such as WhatsApp and RCS
 ```php
 $client = new TextClient('your-api-key');
@@ -76,5 +79,61 @@ $message
 $result = $client->send( [$message] );
 ```
 
-### Status codes
-For all possibly returned status codes, please reference the `TextClientStatusCodes` class.
+## Sending a WhatsApp template message
+By using the `Message` class it is possible to create template messages. Please note that this is WhatsApp only and your template needs to be approved before sending.
+For more info please check our documentation: https://docs.cmtelecom.com/en/api/business-messaging-api/1.0/index#whatsapp-template-message
+```php
+$client = new TextClient('your-api-key');
+$message = new Message('Message Text', 'Sender_name', 'Recipient_PhoneNumber');
+$message
+    ->WithChannels([Channels::WhatsApp])
+    ->WithTemplate(
+            new TemplateMessage(
+                new WhatsappTemplate(
+                    'namespace',
+                    'elementname',
+                    new Language('en'),
+                    [
+                        new ComponentBody([
+                            new ComponentParameterText('firstname')
+                        ])
+                    ]
+                )
+            )
+    );
+$result = $client->send( [$message] );
+```
+
+## Sending a rich WhatsApp template message
+It is also possible to send a rich template with an image!			
+
+```php
+$client = new TextClient('your-api-key');
+$message = new Message('Message Text', 'Sender_name', 'Recipient_PhoneNumber');
+$message
+    ->WithChannels([Channels::WhatsApp])
+    ->WithTemplate(
+        new TemplateMessage(
+            new WhatsappTemplate(
+                'template-name',
+                'the-namespace-of-template',
+                new Language('en'),
+                [
+                    new ComponentHeader([
+                        new ComponentParameterImage(
+                            new MediaContent(
+                                'image name',
+                                'https://image.location',
+                                'image/png'
+                            )
+                        )
+                    ]),
+                    new ComponentBody([
+                        new ComponentParameterText('firstname')
+                    ])
+                ]
+            )
+        )
+    );
+$result = $client->send( [$message] );
+```
