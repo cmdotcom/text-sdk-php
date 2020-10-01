@@ -4,12 +4,12 @@ namespace CMText\RichContent\Templates\Whatsapp;
 
 use PHPUnit\Framework\TestCase;
 
-class LocalizableParamCurrencyTest extends TestCase
+class ComponentParameterCurrencyTest extends TestCase
 {
 
     public function testJsonSerialize()
     {
-        $currency = new LocalizableParamCurrency(
+        $currency = new ComponentParameterCurrency(
             '€20,20',
             'EUR',
             20200
@@ -25,7 +25,7 @@ class LocalizableParamCurrencyTest extends TestCase
         );
 
         $this->assertObjectHasAttribute(
-            'currency_code',
+            'code',
             (json_decode( json_encode($currency))->currency )
         );
 
@@ -33,18 +33,23 @@ class LocalizableParamCurrencyTest extends TestCase
             'amount_1000',
             (json_decode( json_encode($currency))->currency )
         );
+
+        $this->assertObjectHasAttribute(
+            'fallback_value',
+            (json_decode( json_encode($currency))->currency )
+        );
     }
 
     public function test__construct()
     {
-        $currency = new LocalizableParamCurrency(
+        $currency = new ComponentParameterCurrency(
             '€50,11',
             'EUR',
             50110
         );
 
         $this->assertInstanceOf(
-            LocalizableParamBase::class,
+            ComponentParameterBase::class,
             $currency
         );
     }
