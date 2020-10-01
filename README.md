@@ -84,7 +84,7 @@ By using the `Message` class it is possible to create template messages. Please 
 For more info please check our documentation: https://docs.cmtelecom.com/en/api/business-messaging-api/1.0/index#whatsapp-template-message
 ```php
 $client = new TextClient('your-api-key');
-$message = new Message('Message Text', 'Sender_name', 'Recipient_PhoneNumber');
+$message = new Message('Message Text', 'Sender_name', ['Recipient_PhoneNumber']);
 $message
     ->WithChannels([Channels::WhatsApp])
     ->WithTemplate(
@@ -109,7 +109,7 @@ It is also possible to send a rich template with an image!
 
 ```php
 $client = new TextClient('your-api-key');
-$message = new Message('Message Text', 'Sender_name', 'Recipient_PhoneNumber');
+$message = new Message('Message Text', 'Sender_name', ['Recipient_PhoneNumber']);
 $message
     ->WithChannels([Channels::WhatsApp])
     ->WithTemplate(
@@ -131,6 +131,40 @@ $message
                     new ComponentBody([
                         new ComponentParameterText('firstname')
                     ])
+                ]
+            )
+        )
+    );
+$result = $client->send( [$message] );
+```
+
+## Sending an Apple Pay Request
+It is now possible to send an apple pay request only possible in Apple Business Chat
+
+```php
+$client = new TextClient('your-api-key');
+$message = new Message('Message Text', 'Sender_name', ['Recipient_PhoneNumber']);
+$message
+    ->WithChannels([Channels::IMESSAGE])
+    ->WithPayment(
+        new PaymentMessage(
+            new ApplePayConfiguration(
+                'merchant-name',
+                'product-description',
+                'unique-order-guid',
+                1,
+                'currency-code',
+                'recipient-email',
+                'recipient-country-code',
+                'language-country-code',
+                true,
+                true,
+                [
+                    new LineItem(
+                        'product-name',
+                        'final-or-pending',
+                        1
+                    )
                 ]
             )
         )
