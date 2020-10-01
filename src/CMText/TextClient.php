@@ -10,7 +10,7 @@ use CMText\Exceptions\MessagesLimitException;
  *
  * @package CMText
  */
-class TextClient
+class TextClient implements ITextClient
 {
 
     /**
