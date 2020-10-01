@@ -21,7 +21,12 @@ class Gateways
     /**
      * China local gateway
      */
-    const CN = 'https://gw.cmtelecom.cn/v1.0/message';
+    const CN = 'https://gw-cn.cmtelecom.com/v1.0/message';
+
+    /**
+     * Hong Kong local gateway
+     */
+    const HK = 'https://gw-hk.cmtelecom.cn/v1.0/message';
 
     /**
      * United Kingdom local gateway
