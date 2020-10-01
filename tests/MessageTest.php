@@ -184,4 +184,55 @@ class MessageTest extends PHPUnit_Framework_TestCase
             $json->richContent->conversation[0]->template
         );
     }
+
+
+    public function testWithPayment()
+    {
+        $message = new \CMText\Message();
+        $message->WithPayment(
+            new \CMText\RichContent\Messages\PaymentMessage(
+                new \CMText\RichContent\Payments\ApplePayConfiguration(
+                    'merchant name',
+                    'dscription text',
+                    'order reference',
+                    19.99,
+                    'EUR',
+                    'recipient@email',
+                    'NL',
+                    'EN',
+                    true,
+                    true,
+                    [
+                        new \CMText\RichContent\Common\LineItem(
+                            'label',
+                            'type',
+                            19.99
+                        )
+                    ]
+                )
+            )
+        );
+
+        $json = json_decode(json_encode($message));
+
+        $this->assertObjectHasAttribute(
+            'richContent',
+            $json
+        );
+
+        $this->assertObjectHasAttribute(
+            'conversation',
+            $json->richContent
+        );
+
+        $this->assertObjectHasAttribute(
+            'payment',
+            $json->richContent->conversation[0]
+        );
+
+        $this->assertObjectHasAttribute(
+            'lineItems',
+            $json->richContent->conversation[0]->payment
+        );
+    }
 }

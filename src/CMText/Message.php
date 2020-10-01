@@ -5,6 +5,7 @@ namespace CMText;
 
 use CMText\Exceptions\RecipientLimitException;
 use CMText\RichContent\Messages\IRichMessage;
+use CMText\RichContent\Messages\PaymentMessage;
 use CMText\RichContent\Messages\TemplateMessage;
 use CMText\RichContent\RichContent;
 use JsonSerializable;
@@ -217,6 +218,11 @@ class Message implements JsonSerializable
     }
 
 
+    /**
+     * @param \CMText\RichContent\Messages\TemplateMessage $template
+     * @return $this
+     * @throws \CMText\Exceptions\ConversationLimitException
+     */
     public function WithTemplate(TemplateMessage $template)
     {
         if( !$this->richContent ){
@@ -224,6 +230,22 @@ class Message implements JsonSerializable
         }
 
         $this->richContent->AddConversationPart($template);
+        return $this;
+    }
+
+
+    /**
+     * @param \CMText\RichContent\Messages\PaymentMessage $paymentMessage
+     * @return $this
+     * @throws \CMText\Exceptions\ConversationLimitException
+     */
+    public function WithPayment(PaymentMessage $paymentMessage)
+    {
+        if( !$this->richContent ){
+            $this->richContent = new RichContent();
+        }
+
+        $this->richContent->AddConversationPart($paymentMessage);
         return $this;
     }
 
