@@ -189,29 +189,31 @@ class MessageTest extends PHPUnit_Framework_TestCase
     public function testWithPayment()
     {
         $message = new \CMText\Message();
-        $message->WithPayment(
-            new \CMText\RichContent\Messages\PaymentMessage(
-                new \CMText\RichContent\Payments\ApplePayConfiguration(
-                    'merchant name',
-                    'dscription text',
-                    'order reference',
-                    19.99,
-                    'EUR',
-                    'recipient@email',
-                    'NL',
-                    'EN',
-                    true,
-                    true,
-                    [
-                        new \CMText\RichContent\Common\LineItem(
-                            'label',
-                            'type',
-                            19.99
-                        )
-                    ]
+        $message
+            ->WithChannels([Channels::IMESSAGE])
+            ->WithPayment(
+                new \CMText\RichContent\Messages\PaymentMessage(
+                    new \CMText\RichContent\Payments\ApplePayConfiguration(
+                        'merchant-name',
+                        'product-description',
+                        'unique-order-guid',
+                        1,
+                        'currency-code',
+                        'recipient-email',
+                        'recipient-country-code',
+                        'language-country-code',
+                        true,
+                        true,
+                        [
+                            new \CMText\RichContent\Common\LineItem(
+                                'product-name',
+                                'final-or-pending',
+                                1
+                            )
+                        ]
+                    )
                 )
-            )
-        );
+            );
 
         $json = json_decode(json_encode($message));
 
