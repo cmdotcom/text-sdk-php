@@ -2,13 +2,14 @@
 
 namespace CMText\RichContent\Templates\Whatsapp;
 
+use CMText\RichContent\Messages\MediaContent;
 use CMText\RichContent\Templates\TemplateContentBase;
 use PHPUnit\Framework\TestCase;
 
 class WhatsappTemplateTest extends TestCase
 {
 
-    public function testAddLocalizableParam()
+    public function testAddComponents()
     {
         $whatsappTemplate = new WhatsappTemplate(
             'my-namespace-id',
@@ -16,21 +17,40 @@ class WhatsappTemplateTest extends TestCase
             new Language('en')
         );
 
-        $whatsappTemplate->addLocalizableParam(
-            new LocalizableParamDatetime(
-                'always',
-                new \DateTime()
+        $whatsappTemplate->addComponents([
+            new ComponentHeader([
+                new ComponentParameterImage(
+                    new MediaContent(
+                        'image name',
+                        'image://location',
+                        'image/beautiful'
+                    )
+                )
+            ]),
+            new ComponentBody([
+                new ComponentParameterText('body text')
+            ]),
+            new ComponentFooter([
+                new ComponentParameterText('footer text')
+            ]),
+            new ComponentButtonQuickReply(
+                0,
+                new ComponentParameterPayload('🤠')
+            ),
+            new ComponentButtonUrl(
+                1,
+                new ComponentParameterText('https://cm.com/')
             )
-        );
+        ]);
 
-        $fromJson = json_decode(
+        $json = json_decode(
             json_encode($whatsappTemplate)
         );
 
         $this->assertAttributeCount(
-            1,
-            'localizable_params',
-            $fromJson->whatsapp
+            5,
+            'components',
+            $json->whatsapp
         );
     }
 
@@ -54,11 +74,11 @@ class WhatsappTemplateTest extends TestCase
             'template-name',
             new Language('en'),
             [
-                new LocalizableParamDatetime(
+                new ComponentParameterDatetime(
                     'now',
                     new \DateTime()
                 ),
-                new LocalizableParamDatetime(
+                new ComponentParameterDatetime(
                     'some time ago',
                     (new \DateTimeImmutable())->setTimestamp(rand(0, time()))
                 ),

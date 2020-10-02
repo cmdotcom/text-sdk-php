@@ -3,7 +3,7 @@
 namespace CMText\RichContent\Messages;
 
 use CMText\RichContent\Templates\Whatsapp\Language;
-use CMText\RichContent\Templates\Whatsapp\LocalizableParamCurrency;
+use CMText\RichContent\Templates\Whatsapp\ComponentParameterCurrency;
 use CMText\RichContent\Templates\Whatsapp\WhatsappTemplate;
 use PHPUnit\Framework\TestCase;
 
@@ -18,7 +18,7 @@ class TemplateMessageTest extends TestCase
                 'element-name',
                 new Language('nl'),
                 [
-                    new LocalizableParamCurrency(
+                    new ComponentParameterCurrency(
                         'free',
                         'USD',
                         0.0
@@ -38,7 +38,7 @@ class TemplateMessageTest extends TestCase
                 'element-name',
                 new Language('nl'),
                 [
-                    new LocalizableParamCurrency(
+                    new ComponentParameterCurrency(
                         'Two Benjamins',
                         'USD',
                         200000
