@@ -42,6 +42,6 @@ interface ITextClient
      * @throws \CMText\Exceptions\MessagesLimitException
      */
     public function send(
-        array $messages = []
+        array $messages
     );
 }
