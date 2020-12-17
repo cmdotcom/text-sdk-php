@@ -86,7 +86,7 @@ For more info please check our documentation: https://docs.cmtelecom.com/en/api/
 $client = new TextClient('your-api-key');
 $message = new Message('Message Text', 'Sender_name', ['Recipient_PhoneNumber']);
 $message
-    ->WithChannels([Channels::WhatsApp])
+    ->WithChannels([Channels::WHATSAPP])
     ->WithTemplate(
             new TemplateMessage(
                 new WhatsappTemplate(
@@ -111,7 +111,7 @@ It is also possible to send a rich template with an image!
 $client = new TextClient('your-api-key');
 $message = new Message('Message Text', 'Sender_name', ['Recipient_PhoneNumber']);
 $message
-    ->WithChannels([Channels::WhatsApp])
+    ->WithChannels([Channels::WHATSAPP])
     ->WithTemplate(
         new TemplateMessage(
             new WhatsappTemplate(
