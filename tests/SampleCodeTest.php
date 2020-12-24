@@ -1,8 +1,9 @@
 <?php
 require __DIR__ .'/../vendor/autoload.php';
 
+use PHPUnit\Framework\TestCase;
 
-class SampleCodeTest extends PHPUnit_Framework_TestCase
+class SampleCodeTest extends TestCase
 {
 
     /**

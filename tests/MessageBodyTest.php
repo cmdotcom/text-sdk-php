@@ -3,8 +3,9 @@ require __DIR__ .'/../vendor/autoload.php';
 
 
 use CMText\MessageBody;
+use PHPUnit\Framework\TestCase;
 
-class MessageBodyTest extends PHPUnit_Framework_TestCase
+class MessageBodyTest extends TestCase
 {
 
     /**

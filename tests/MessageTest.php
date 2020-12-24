@@ -3,8 +3,9 @@ require __DIR__ .'/../vendor/autoload.php';
 
 use CMText\Channels;
 use CMText\Message;
+use PHPUnit\Framework\TestCase;
 
-class MessageTest extends PHPUnit_Framework_TestCase
+class MessageTest extends TestCase
 {
 
     /**

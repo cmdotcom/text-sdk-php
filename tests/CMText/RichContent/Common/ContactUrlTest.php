@@ -30,7 +30,7 @@ class ContactUrlTest extends TestCase
 
     public function testContactUrlException()
     {
-        $this->setExpectedException(ContactUrlException::class, 'Invalid Url');
+        $this->expectException(ContactUrlException::class);
         new ContactUrl(__LINE__);
     }
 }

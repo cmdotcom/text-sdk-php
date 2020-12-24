@@ -135,7 +135,7 @@ class ContactTest extends TestCase
 
     public function testContactException()
     {
-        $this->setExpectedException(ContactException::class);
+        $this->expectException(ContactException::class);
         new Contact('just a string');
     }
 }

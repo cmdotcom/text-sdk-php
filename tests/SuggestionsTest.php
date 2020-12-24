@@ -1,7 +1,9 @@
 <?php
 
 
-class SuggestionsTest extends PHPUnit_Framework_TestCase
+use PHPUnit\Framework\TestCase;
+
+class SuggestionsTest extends TestCase
 {
 
     public function testBaseClassProperties()

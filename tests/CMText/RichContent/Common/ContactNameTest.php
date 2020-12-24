@@ -29,7 +29,7 @@ class ContactNameTest extends TestCase
 
     public function testTypeErrorRequiredProperty()
     {
-        $this->setExpectedException(\TypeError::class);
+        $this->expectException(\TypeError::class);
         new ContactName(null);
     }
 }

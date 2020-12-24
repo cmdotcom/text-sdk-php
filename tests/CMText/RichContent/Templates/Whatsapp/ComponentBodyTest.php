@@ -31,7 +31,7 @@ class ComponentBodyTest extends TestCase
 
     public function testUnsupportedParameterType()
     {
-        $this->setExpectedException(
+        $this->expectException(
             WhatsappTemplateComponentParameterTypeException::class
         );
 
