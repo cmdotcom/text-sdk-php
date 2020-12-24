@@ -144,4 +144,97 @@ class MessageTest extends PHPUnit_Framework_TestCase
         $json = $message->jsonSerialize();
         $this->assertEquals($json->allowedChannels, [Channels::SMS, Channels::WHATSAPP]);
     }
+
+    /**
+     * Tests if a Template message is formatted properly
+     * @throws \CMText\Exceptions\WhatsappTemplateComponentParameterTypeException
+     */
+    public function testWithTemplate()
+    {
+        $message = new \CMText\Message();
+        $message->WithTemplate(
+            new \CMText\RichContent\Messages\TemplateMessage(
+                new \CMText\RichContent\Templates\Whatsapp\WhatsappTemplate(
+                    'namespace',
+                    'elementname',
+                    new \CMText\RichContent\Templates\Whatsapp\Language('nl')
+                )
+            )
+        );
+
+        $json = json_decode(json_encode($message));
+
+        $this->assertObjectHasAttribute(
+            'richContent',
+            $json
+        );
+
+        $this->assertObjectHasAttribute(
+            'conversation',
+            $json->richContent
+        );
+
+        $this->assertObjectHasAttribute(
+            'template',
+            $json->richContent->conversation[0]
+        );
+
+        $this->assertObjectHasAttribute(
+            'whatsapp',
+            $json->richContent->conversation[0]->template
+        );
+    }
+
+
+    public function testWithPayment()
+    {
+        $message = new \CMText\Message();
+        $message
+            ->WithChannels([Channels::IMESSAGE])
+            ->WithPayment(
+                new \CMText\RichContent\Messages\PaymentMessage(
+                    new \CMText\RichContent\Payments\ApplePayConfiguration(
+                        'merchant-name',
+                        'product-description',
+                        'unique-order-guid',
+                        1,
+                        'currency-code',
+                        'recipient-email',
+                        'recipient-country-code',
+                        'language-country-code',
+                        true,
+                        true,
+                        [
+                            new \CMText\RichContent\Common\LineItem(
+                                'product-name',
+                                'final-or-pending',
+                                1
+                            )
+                        ]
+                    )
+                )
+            );
+
+        $json = json_decode(json_encode($message));
+
+        $this->assertObjectHasAttribute(
+            'richContent',
+            $json
+        );
+
+        $this->assertObjectHasAttribute(
+            'conversation',
+            $json->richContent
+        );
+
+        $this->assertObjectHasAttribute(
+            'payment',
+            $json->richContent->conversation[0]
+        );
+
+        $this->assertObjectHasAttribute(
+            'lineItems',
+            $json->richContent->conversation[0]->payment
+        );
+    }
 }

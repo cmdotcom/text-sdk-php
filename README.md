@@ -18,7 +18,7 @@ A software development kit to provide ways to interact with CM.com's Text servic
 Using your unique `ApiKey` (or product token) which authorizes you on the CM platform. Always keep this key secret!
 
 ```php
-$client = new TextClient('your-api-key');
+$client = new \CMText\TextClient('your-api-key');
 ```
 
 ### Send a message
@@ -54,7 +54,10 @@ $result = $client->SendMessage('Message_Text', 'CM.com', [ 'Recipient_PhoneNumbe
 }
 ```
 
-## Sending a rich message
+### Status codes
+For all possibly returned status codes, please reference the `TextClientStatusCodes` class.
+
+### Sending a rich message
 By using the `Message` class it is possible to create messages with media for channels such as WhatsApp and RCS
 ```php
 $client = new TextClient('your-api-key');
@@ -76,5 +79,95 @@ $message
 $result = $client->send( [$message] );
 ```
 
-### Status codes
-For all possibly returned status codes, please reference the `TextClientStatusCodes` class.
+## Sending a WhatsApp template message
+By using the `Message` class it is possible to create template messages. Please note that this is WhatsApp only and your template needs to be approved before sending.
+For more info please check our documentation: https://docs.cmtelecom.com/en/api/business-messaging-api/1.0/index#whatsapp-template-message
+```php
+$client = new TextClient('your-api-key');
+$message = new Message('Message Text', 'Sender_name', ['Recipient_PhoneNumber']);
+$message
+    ->WithChannels([Channels::WHATSAPP])
+    ->WithTemplate(
+            new TemplateMessage(
+                new WhatsappTemplate(
+                    'namespace',
+                    'elementname',
+                    new Language('en'),
+                    [
+                        new ComponentBody([
+                            new ComponentParameterText('firstname')
+                        ])
+                    ]
+                )
+            )
+    );
+$result = $client->send( [$message] );
+```
+
+## Sending a rich WhatsApp template message
+It is also possible to send a rich template with an image!			
+
+```php
+$client = new TextClient('your-api-key');
+$message = new Message('Message Text', 'Sender_name', ['Recipient_PhoneNumber']);
+$message
+    ->WithChannels([Channels::WHATSAPP])
+    ->WithTemplate(
+        new TemplateMessage(
+            new WhatsappTemplate(
+                'template-name',
+                'the-namespace-of-template',
+                new Language('en'),
+                [
+                    new ComponentHeader([
+                        new ComponentParameterImage(
+                            new MediaContent(
+                                'image name',
+                                'https://image.location',
+                                'image/png'
+                            )
+                        )
+                    ]),
+                    new ComponentBody([
+                        new ComponentParameterText('firstname')
+                    ])
+                ]
+            )
+        )
+    );
+$result = $client->send( [$message] );
+```
+
+## Sending an Apple Pay Request
+It is now possible to send an apple pay request only possible in Apple Business Chat
+
+```php
+$client = new TextClient('your-api-key');
+$message = new Message('Message Text', 'Sender_name', ['Recipient_PhoneNumber']);
+$message
+    ->WithChannels([Channels::IMESSAGE])
+    ->WithPayment(
+        new PaymentMessage(
+            new ApplePayConfiguration(
+                'merchant-name',
+                'product-description',
+                'unique-order-guid',
+                1,
+                'currency-code',
+                'recipient-email',
+                'recipient-country-code',
+                'language-country-code',
+                true,
+                true,
+                [
+                    new LineItem(
+                        'product-name',
+                        'final-or-pending',
+                        1
+                    )
+                ]
+            )
+        )
+    );
+$result = $client->send( [$message] );
+```

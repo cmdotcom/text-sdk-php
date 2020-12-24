@@ -10,7 +10,7 @@ use CMText\Exceptions\MessagesLimitException;
  *
  * @package CMText
  */
-class TextClient
+class TextClient implements ITextClient
 {
 
     /**
@@ -24,11 +24,6 @@ class TextClient
     private $apiKey;
 
     /**
-     * @var array
-     */
-    private $messages = [];
-
-    /**
      * Maximum amount of Message objects allowed per request
      */
     const MESSAGES_MAXIMUM = 1000;
@@ -36,7 +31,7 @@ class TextClient
     /**
      * SDK Version constant
      */
-    const VERSION = '1.2.1';
+    const VERSION = '2.0.1';
 
 
     /**
@@ -76,11 +71,10 @@ class TextClient
     )
     {
         try {
-            // store this Message
-            $this->messages[] = new Message($message, $from, $to, $reference);
-
             // send it out instantly
-            return self::send();
+            return self::send([
+                new Message($message, $from, $to, $reference)
+            ]);
 
         }catch (\Exception $exception){
             return new TextClientResult(
@@ -100,18 +94,14 @@ class TextClient
      * @throws \CMText\Exceptions\MessagesLimitException
      */
     public function send(
-        array $messages = []
+        array $messages
     )
     {
-        // set provided messages
-        $this->messages = $messages ?: $this->messages;
-
-        if(count($this->messages) > self::MESSAGES_MAXIMUM){
+        if(count($messages) > self::MESSAGES_MAXIMUM){
             throw new MessagesLimitException('Maximum amount of Message objects exceeded. ('. self::MESSAGES_MAXIMUM .')');
         }
 
-        $requestModel = new TextClientRequest($this->apiKey, $this->messages);
-
+        $requestModel = new TextClientRequest($this->apiKey, $messages);
         $ch = curl_init($this->gateway);
 
         try {
