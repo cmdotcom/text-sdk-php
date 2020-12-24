@@ -30,13 +30,13 @@ class ContactEmailTest extends TestCase
 
     public function testInvalidEmailException()
     {
-        $this->setExpectedException(ContactEmailException::class);
+        $this->expectException(ContactEmailException::class);
         new ContactEmail(__LINE__);
     }
 
     public function testContactEmailTypeException()
     {
-        $this->setExpectedException(ContactEmailException::class);
+        $this->expectException(ContactEmailException::class);
         new ContactEmail('text-sdk-php@cm.com', 'EXCEPTIONAL');
     }
 }

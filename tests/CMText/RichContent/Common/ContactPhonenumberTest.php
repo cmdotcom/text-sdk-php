@@ -36,7 +36,7 @@ class ContactPhonenumberTest extends TestCase
 
     public function testContactPhonenumberTypeException()
     {
-        $this->setExpectedException(ContactPhonenumberException::class);
+        $this->expectException(ContactPhonenumberException::class);
         new ContactPhonenumber('+31765727000', 'EXCEPTIONAL');
     }
 }

@@ -22,7 +22,7 @@ class ContactBirthdayTest extends TestCase
 
     public function testDateTimeInterfaceException()
     {
-        $this->setExpectedException(\TypeError::class);
+        $this->expectException(\TypeError::class);
         new ContactBirthday('never');
     }
 }

@@ -39,14 +39,14 @@ class ContactAddressTest extends TestCase
     public function testCountryCodeException()
     {
         // invalid country code
-        $this->setExpectedException(ContactAddressException::class, 'Invalid CountryCode');
+        $this->expectException(ContactAddressException::class);
         new ContactAddress('Breda', 'Netherlands', 'EXCEPTIONAL');
     }
 
     public function testAddressTypeException()
     {
         // unknown type
-        $this->setExpectedException(ContactAddressException::class, 'Unknown ContactAddress Type');
+        $this->expectException(ContactAddressException::class);
         new ContactAddress('Breda', 'Netherlands', 'NL', 'Noord Brabant', 'Konijnenberg 30', 'EXCEPTIONAL', '4825BD');
     }
 }
