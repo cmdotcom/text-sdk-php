@@ -3,8 +3,9 @@ require __DIR__ .'/../vendor/autoload.php';
 
 
 use CMText\TextClient;
+use PHPUnit\Framework\TestCase;
 
-class TextClientTest extends PHPUnit_Framework_TestCase
+class TextClientTest extends TestCase
 {
 
     /**
@@ -45,31 +46,6 @@ class TextClientTest extends PHPUnit_Framework_TestCase
                 $exception
             );
 
-        }
-    }
-
-
-    /**
-     * The Maximum amount of Recipients in a request should be respected
-     */
-    public function testRecipientsLimit()
-    {
-        try{
-            $client = new TextClient('your-api-key', 'unavailablehost');
-
-            $recipients = array_fill(
-                0,
-                \CMText\Message::RECIPIENTS_MAXIMUM + 1,
-                '00334455667788'
-            );
-
-            $client->SendMessage('body-content', 'CM.com', $recipients);
-
-        }catch (\Exception $exception){
-            $this->assertInstanceOf(
-                \CMText\Exceptions\RecipientLimitException::class,
-                $exception
-            );
         }
     }
 
