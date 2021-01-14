@@ -47,10 +47,9 @@ class WhatsappTemplateTest extends TestCase
             json_encode($whatsappTemplate)
         );
 
-        $this->assertAttributeCount(
+        $this->assertCount(
             5,
-            'components',
-            $json->whatsapp
+            $json->whatsapp->components
         );
     }
 

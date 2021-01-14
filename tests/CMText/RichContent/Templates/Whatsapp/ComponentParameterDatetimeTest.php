@@ -35,25 +35,26 @@ class ComponentParameterDatetimeTest extends TestCase
             $componentParameter
         );
 
+        $json = json_decode(json_encode($componentParameter));
+
         $this->assertObjectHasAttribute(
             'date_time',
-            json_decode(json_encode($componentParameter))
+            $json
         );
 
         $this->assertObjectHasAttribute(
             'fallback_value',
-            (json_decode(json_encode($componentParameter)))->date_time
+            $json->date_time
         );
 
         $this->assertObjectHasAttribute(
             'timestamp',
-            (json_decode(json_encode($componentParameter)))->date_time
+            $json->date_time
         );
 
-        $this->assertAttributeEquals(
+        $this->assertEquals(
             $datetime->getTimestamp(),
-            'timestamp',
-            (json_decode(json_encode($componentParameter)))->date_time
+            $json->date_time->timestamp
         );
     }
 }

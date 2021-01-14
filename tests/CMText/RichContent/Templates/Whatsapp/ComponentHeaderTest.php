@@ -13,10 +13,9 @@ class ComponentHeaderTest extends TestCase
 
         $json = json_decode(json_encode($component));
 
-        $this->assertAttributeEquals(
+        $this->assertEquals(
             ComponentHeader::TYPE,
-            'type',
-            $json
+            $json->type
         );
 
         $this->assertCount(

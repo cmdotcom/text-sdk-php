@@ -16,16 +16,14 @@ class ComponentButtonUrlTest extends TestCase
 
         $json = json_decode(json_encode($component));
 
-        $this->assertAttributeEquals(
+        $this->assertEquals(
             'url',
-            'sub_type',
-            $json
+            $json->sub_type
         );
 
-        $this->assertAttributeCount(
+        $this->assertCount(
             1,
-            'parameters',
-            $json
+            $json->parameters
         );
     }
 }
