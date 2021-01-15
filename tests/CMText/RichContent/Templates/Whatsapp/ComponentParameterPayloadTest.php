@@ -13,15 +13,14 @@ class ComponentParameterPayloadTest extends TestCase
 
         $json = json_decode(json_encode($component));
 
-        $this->assertAttributeEquals(
+        $this->assertEquals(
             ComponentParameterPayload::TYPE,
-            'type',
-            $json
+            $json->type
         );
 
         $this->assertObjectHasAttribute(
             'payload',
-            $component
+            $json
         );
     }
 }
