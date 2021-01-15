@@ -17,7 +17,7 @@ before_script:
 - travis_retry composer install --no-interaction --prefer-source
 
 script:
-- vendor/bin/phpunit --coverage-clover=coverage.xml tests
+- vendor/bin/phpunit --coverage-clover=coverage.xml --whitelist=./src tests
 
 after_success:
 - bash <(curl -s https://codecov.io/bash)
