@@ -9,7 +9,7 @@ A software development kit to provide ways to interact with CM.com's Text servic
 
 ### Requirements
 
-- php 7.*
+- php 7.* or 8.0
 
 
 ## Usage
