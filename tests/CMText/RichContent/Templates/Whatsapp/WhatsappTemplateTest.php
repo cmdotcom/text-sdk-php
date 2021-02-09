@@ -89,4 +89,22 @@ class WhatsappTemplateTest extends TestCase
             $whatsappTemplate
         );
     }
+
+    public function testTemplateWithoutComponents()
+    {
+        $whatsappTemplate = new WhatsappTemplate(
+            'my-namespace-id',
+            'template-name',
+            new Language('en')
+        );
+
+        $json = json_decode(
+            json_encode($whatsappTemplate)
+        );
+        
+        $this->assertObjectHasAttribute(
+            'components',
+            $json->whatsapp
+        );
+    }
 }
