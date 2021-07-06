@@ -81,4 +81,10 @@ class Channels
      * @note CM needs to configure this with you.
      */
     const GOOGLEBUSINESSMESSAGES = 'Google Business Messages';
+
+    /**
+     * Send Instagram messages.
+     * @note CM needs to configure this with you.
+     */
+    const INSTAGRAM = 'Instagram';
 }
