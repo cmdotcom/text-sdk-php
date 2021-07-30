@@ -20,15 +20,14 @@ class ComponentParameterImageTest extends TestCase
 
         $json = json_decode(json_encode($component));
 
-        $this->assertAttributeEquals(
+        $this->assertEquals(
             ComponentParameterImage::TYPE,
-            'type',
-            $json
+            $json->type
         );
 
         $this->assertObjectHasAttribute(
             'media',
-            $component
+            $json
         );
     }
 }

@@ -47,10 +47,9 @@ class WhatsappTemplateTest extends TestCase
             json_encode($whatsappTemplate)
         );
 
-        $this->assertAttributeCount(
+        $this->assertCount(
             5,
-            'components',
-            $json->whatsapp
+            $json->whatsapp->components
         );
     }
 
@@ -88,6 +87,24 @@ class WhatsappTemplateTest extends TestCase
         $this->assertInstanceOf(
             TemplateContentBase::class,
             $whatsappTemplate
+        );
+    }
+
+    public function testTemplateWithoutComponents()
+    {
+        $whatsappTemplate = new WhatsappTemplate(
+            'my-namespace-id',
+            'template-name',
+            new Language('en')
+        );
+
+        $json = json_decode(
+            json_encode($whatsappTemplate)
+        );
+        
+        $this->assertObjectHasAttribute(
+            'components',
+            $json->whatsapp
         );
     }
 }

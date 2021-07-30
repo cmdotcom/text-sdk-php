@@ -2,8 +2,6 @@
 
 namespace CMText\RichContent\Templates\Whatsapp;
 
-use CMText\Exceptions\ContactEmailException;
-use CMText\Exceptions\SuggestionsLimitException;
 use CMText\Exceptions\WhatsappTemplateComponentParameterTypeException;
 use CMText\RichContent\Messages\MediaContent;
 use PHPUnit\Framework\TestCase;
@@ -17,10 +15,9 @@ class ComponentBodyTest extends TestCase
 
         $json = json_decode(json_encode($component));
 
-        $this->assertAttributeEquals(
+        $this->assertEquals(
             ComponentBody::TYPE,
-            'type',
-            $json
+            $json->type
         );
 
         $this->assertCount(

@@ -2,7 +2,7 @@
     "name": "cmdotcom/text-sdk-php",
     "description": "PHP SDK to send messages with CM.com",
     "type": "library",
-    "version": "2.0.2",
+    "version": "2.0.6",
     "keywords": ["sms","cm.com","rcs","whatsapp","viber","line","wechat","imessage","twitter"],
     "homepage": "https://www.cm.com/products/text/",
     "license": "MIT",
@@ -16,10 +16,10 @@
     "require": {
         "ext-curl": "*",
         "ext-json": "*",
-        "php": "^7.0"
+        "php": "^7.0||^8.0"
     },
     "require-dev": {
-        "phpunit/phpunit": "~6.5"
+        "phpunit/phpunit": "~6.0||~9.0"
     },
     "autoload": {
         "psr-0": {

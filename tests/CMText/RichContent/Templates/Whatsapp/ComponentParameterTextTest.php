@@ -14,15 +14,14 @@ class ComponentParameterTextTest extends TestCase
 
         $json = json_decode(json_encode($component));
 
-        $this->assertAttributeEquals(
+        $this->assertEquals(
             ComponentParameterText::TYPE,
-            'type',
-            $json
+            $json->type
         );
 
         $this->assertObjectHasAttribute(
             'text',
-            $component
+            $json
         );
     }
 }

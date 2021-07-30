@@ -33,10 +33,9 @@ class WhatsappTemplate extends TemplateContentBase
         $this->content->namespace = $Namespace;
         $this->content->element_name = $ElementName;
         $this->content->language = $Language;
+        $this->content->components = [];
 
-        if( count($Components) > 0 ){
-            $this->addComponents($Components);
-        }
+        $this->addComponents($Components);
     }
 
     /**

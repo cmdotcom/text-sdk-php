@@ -4,6 +4,7 @@ namespace CMText;
 
 
 use CMText\Exceptions\MessagesLimitException;
+use CMText\Exceptions\RecipientLimitException;
 
 /**
  * Class TextClient
@@ -31,7 +32,7 @@ class TextClient implements ITextClient
     /**
      * SDK Version constant
      */
-    const VERSION = '2.0.2';
+    const VERSION = '2.0.6';
 
 
     /**
@@ -59,9 +60,11 @@ class TextClient implements ITextClient
      * @param string $message - Message body to send
      * @param string $from - Sender name
      * @param array $to - Recipient phonenumbers
-     * @param string $reference optional
+     * @param string|null $reference optional
      *
      * @return TextClientResult
+     * @throws RecipientLimitException
+     * @throws MessagesLimitException
      */
     public function SendMessage(
         string $message,
@@ -70,18 +73,10 @@ class TextClient implements ITextClient
         string $reference = null
     )
     {
-        try {
-            // send it out instantly
-            return self::send([
-                new Message($message, $from, $to, $reference)
-            ]);
-
-        }catch (\Exception $exception){
-            return new TextClientResult(
-                TextClientStatusCodes::UNKNOWN,
-                json_encode(['details' => $exception->getMessage()])
-            );
-        }
+        // send it out instantly
+        return self::send([
+            new Message($message, $from, $to, $reference)
+        ]);
     }
 
 
@@ -91,7 +86,7 @@ class TextClient implements ITextClient
      * @param array $messages Array of Message objects
      *
      * @return TextClientResult
-     * @throws \CMText\Exceptions\MessagesLimitException
+     * @throws MessagesLimitException
      */
     public function send(
         array $messages

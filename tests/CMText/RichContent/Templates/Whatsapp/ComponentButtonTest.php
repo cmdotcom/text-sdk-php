@@ -16,10 +16,9 @@ class ComponentButtonTest extends TestCase
 
         $json = json_decode(json_encode($component));
 
-        $this->assertAttributeEquals(
+        $this->assertEquals(
             ComponentButton::TYPE,
-            'type',
-            $json
+            $json->type
         );
 
         $this->assertObjectHasAttribute(

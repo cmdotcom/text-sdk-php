@@ -13,10 +13,9 @@ class ComponentFooterTest extends TestCase
 
         $json = json_decode(json_encode($component));
 
-        $this->assertAttributeEquals(
+        $this->assertEquals(
             ComponentFooter::TYPE,
-            'type',
-            $json
+            $json->type
         );
 
         $this->assertCount(

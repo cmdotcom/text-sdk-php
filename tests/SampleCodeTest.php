@@ -21,19 +21,4 @@ class SampleCodeTest extends TestCase
         );
     }
 
-    /**
-     * Result of using a bad api-key should be that specific error.
-     */
-    public function testApiKeyIncorrect()
-    {
-        $client = new \CMText\TextClient('your-api-key', \CMText\Gateways::GLOBAL);
-
-        $response = $client->send([]);
-
-        $this->assertEquals(
-            \CMText\TextClientStatusCodes::APIKEY_INCORRECT,
-            $response->statusCode
-        );
-    }
-
 }
