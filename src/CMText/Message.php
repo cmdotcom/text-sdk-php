@@ -71,6 +71,11 @@ class Message implements JsonSerializable
     private $richContent;
 
     /**
+     * @var int Optional Data Coding Scheme property for SMS messages.
+     */
+    private $dcs;
+
+    /**
      * Fallback value for Sender
      */
     const SENDER_FALLBACK = 'cm.com';
@@ -90,21 +95,21 @@ class Message implements JsonSerializable
     /**
      * Message constructor.
      *
-     * @param string $body
+     * @param string|MessageBody $body
      * @param string|null $from
      * @param array $to
      * @param string|null $reference
      * @throws \CMText\Exceptions\RecipientLimitException
      */
-    public function __construct(string $body = '', string $from = null, array $to = [], string $reference = null)
+    public function __construct($body = '', string $from = null, array $to = [], string $reference = null)
     {
-        $this->body = new MessageBody($body);
-        $this->from = $from ?? self::SENDER_FALLBACK;
-        $this->reference = $reference;
-        self::AddRecipients($to);
+        $this->__set('body', $body);
+        $this->__set('from', $from);
+        $this->__set('reference', $reference);
+        $this->__set('to', $to);
 
-        $this->minimumNumberOfMessageParts = self::MESSAGEPARTS_MINIMUM;
-        $this->maximumNumberOfMessageParts = self::MESSAGEPARTS_MAXIMUM;
+        $this->__set('minimumNumberOfMessageParts', self::MESSAGEPARTS_MINIMUM);
+        $this->__set('maximumNumberOfMessageParts', self::MESSAGEPARTS_MAXIMUM);
 
         $this->customgrouping3 = 'text-sdk-php-' . TextClient::VERSION;
     }
@@ -120,13 +125,21 @@ class Message implements JsonSerializable
     {
         switch ($name){
             case 'body':
-                $this->body = new MessageBody($value);
+                if($value instanceof MessageBody){
+                    $this->body = $value;
+                }else{
+                    $this->body = new MessageBody($value);
+                }
                 break;
 
             case 'from':
+                $this->{$name} = $value ?? self::SENDER_FALLBACK;;
+                break;
+
             case 'minimumNumberOfMessageParts':
             case 'maximumNumberOfMessageParts':
             case 'reference':
+            case 'dcs':
                 $this->{$name} = $value;
                 break;
 
@@ -189,7 +202,7 @@ class Message implements JsonSerializable
 
     /**
      * Add a Suggestion to a message. Supported Suggestion types depend on the Channel used.
-     * @param $suggestions
+     * @param array $suggestions
      * @return $this
      * @throws \CMText\Exceptions\SuggestionsLimitException
      */
@@ -282,6 +295,10 @@ class Message implements JsonSerializable
 
         if( null !== $this->reference ){
             $return['reference'] = $this->reference;
+        }
+
+        if( null !== $this->dcs ){
+            $return['dcs'] = $this->dcs;
         }
 
         return (object)$return;
