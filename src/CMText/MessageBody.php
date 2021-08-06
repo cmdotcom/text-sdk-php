@@ -21,45 +21,66 @@ class MessageBody implements JsonSerializable
     /**
      * @var string
      */
-    private $type = MessageBodyTypes::AUTO;
+    private $type;
 
 
     /**
      * MessageBody constructor.
      * @param string $content
+     * @param string $type
      */
-    public function __construct(string $content)
+    public function __construct(string $content, string $type = MessageBodyTypes::AUTO)
     {
-        $this->content = $content;
+        $this->__set('content', $content);
+        $this->__set('type', $type);
     }
 
 
     /**
-     * Getters for a limited set or properties, providing normalized results
+     * Setters providing sanitized results
      *
      * @param $name
-     * @return bool|string
+     * @param $value
+     * @return void
      */
-    public function __get($name)
+    public function __set($name, $value)
     {
         switch ($name){
-            /**
-             * message content always as utf8 encoded string
-             */
-            case 'content':
-                return $this->content;
-                break;
-
-            /**
-             * message type as is with a fallback to the defined AUTO MessageBodyType
-             */
             case 'type':
-                return $this->type ?: MessageBodyTypes::AUTO;
+                if( in_array(
+                    $value,
+                    (new \ReflectionClass(MessageBodyTypes::class))->getConstants()
+                ) ){
+                    $this->type = $value;
+                }else{
+                    $this->type = MessageBodyTypes::AUTO;
+                }
                 break;
 
-            default:
-                return false;
+            case 'content':
+                // try to make sure the content as Json-compatible as possible
+                if( function_exists('mb_convert_encoding') && function_exists('mb_detect_encoding') ){
+                    $value = mb_convert_encoding(
+                        $value,
+                        'UTF-8',
+                        mb_detect_encoding($value)
+                    );
+                }
+
+                $this->content = $value;
+                break;
         }
+    }
+
+
+    /**
+     * @param string $type
+     * @return $this
+     */
+    public function WithType(string $type): MessageBody
+    {
+        $this->__set('type', $type);
+        return $this;
     }
 
 
@@ -68,15 +89,6 @@ class MessageBody implements JsonSerializable
      */
     public function jsonSerialize()
     {
-        // try to make sure the content as Json-compatible as possible
-        if( function_exists('mb_convert_encoding') && function_exists('mb_detect_encoding') ){
-            $this->content = mb_convert_encoding(
-                $this->content,
-                'UTF-8',
-                mb_detect_encoding($this->content)
-            );
-        }
-
         return (object)[
             'content' => $this->content,
             'type' => $this->type,

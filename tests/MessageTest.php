@@ -15,18 +15,13 @@ class MessageTest extends TestCase
     {
         $testSender = 'test-sender';
 
-        try {
-            $new = new Message(
-                'test text',
-                $testSender,
-                [
-                    '00334455667788',
-                ]
-            );
-
-        }catch (\Exception $e){
-            $new = null;
-        }
+        $new = new Message(
+            'test text',
+            $testSender,
+            [
+                '00334455667788',
+            ]
+        );
 
         $this->assertInstanceOf(
             Message::class,
@@ -55,6 +50,7 @@ class MessageTest extends TestCase
             '99999999999999',
         ];
         $reference = 'test-reference';
+        $dcs = 8;
 
         // initialize an empty Message
         $new = new Message();
@@ -64,6 +60,7 @@ class MessageTest extends TestCase
         $new->from = $from;
         $new->to = $to;
         $new->reference = $reference;
+        $new->dcs = $dcs;
 
         // get an instance that we can check
         $json = $new->jsonSerialize();
@@ -71,7 +68,7 @@ class MessageTest extends TestCase
         // verify the Body content is correctly set
         $this->assertEquals(
             $body,
-            $json->body->content
+            $json->body->jsonSerialize()->content
         );
 
         // verify the Sender is correctly set
@@ -86,7 +83,13 @@ class MessageTest extends TestCase
             $json->reference
         );
 
-        // verify the correct amount of Recipients are added
+        // verify the dcs is correctly set
+        $this->assertEquals(
+            $dcs,
+            $json->dcs
+        );
+
+        // verify the correct amount of Recipients is added
         $this->assertCount(
             count($to),
             $json->to
@@ -237,5 +240,30 @@ class MessageTest extends TestCase
             'lineItems',
             $json->richContent->conversation[0]->payment
         );
+    }
+
+
+    public function testSettingCustomBodyType()
+    {
+        $customMessageBody = new \CMText\MessageBody(
+            'content',
+            \CMText\MessageBodyTypes::TEXT
+        );
+
+        $message = new Message($customMessageBody);
+
+        $json = json_decode( json_encode($message) );
+
+        $this->assertEquals(
+            \CMText\MessageBodyTypes::TEXT,
+            $json->body->type
+        );
+    }
+
+
+    public function testSettingBodyIncorrectly()
+    {
+        $this->expectException(TypeError::class);
+        new Message(new Channels());
     }
 }
