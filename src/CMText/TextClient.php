@@ -20,9 +20,19 @@ class TextClient implements ITextClient
     private $gateway;
 
     /**
-     * @var
+     * @var string
      */
     private $apiKey;
+
+    /**
+     * @var string|null
+     */
+    private $proxy = null;
+
+    /**
+     * @var string|null
+     */
+    private $proxy_auth = null;
 
     /**
      * Maximum amount of Message objects allowed per request
@@ -40,10 +50,14 @@ class TextClient implements ITextClient
      *
      * @param string $apiKey
      * @param string $gateway optional
+     * @param string|null $proxy
+     * @param string|null $proxy_auth
      */
     public function __construct(
         string $apiKey,
-        $gateway = Gateways::GLOBAL
+        $gateway = Gateways::GLOBAL,
+        $proxy = null,
+        proxy_auth = null
     )
     {
         // load the CM API KEY for authentication against the gateway
@@ -51,6 +65,12 @@ class TextClient implements ITextClient
 
         // set the Gateway to use
         $this->gateway = $gateway;
+
+        // set the proxy to use
+        $this->proxy = $proxy;
+
+        // set the proxy user credentials
+        $this->proxy_auth = $proxy_auth;
     }
 
 
@@ -111,6 +131,8 @@ class TextClient implements ITextClient
                 ],
                 CURLOPT_TIMEOUT => 20,
                 CURLOPT_CONNECTTIMEOUT => 5,
+                CURLOPT_PROXY => $this->proxy,
+                CURLOPT_PROXYUSERPWD => $this->proxy_auth,
             ]);
 
             $response = curl_exec($ch);
