@@ -21,6 +21,7 @@ abstract class TemplateContentBase implements ITemplateContent
     /**
      * @inheritDoc
      */
+	#[\ReturnTypeWillChange]
     function jsonSerialize()
     {
         return (object)[

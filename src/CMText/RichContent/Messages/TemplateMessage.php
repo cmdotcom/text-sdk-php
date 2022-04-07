@@ -19,6 +19,7 @@ class TemplateMessage implements IRichMessage
     /**
      * @inheritDoc
      */
+	#[\ReturnTypeWillChange]
     public function jsonSerialize()
     {
         return $this;

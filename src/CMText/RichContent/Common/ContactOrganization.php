@@ -43,6 +43,7 @@ class ContactOrganization implements \JsonSerializable
     /**
      * @inheritDoc
      */
+	#[\ReturnTypeWillChange]
     public function jsonSerialize()
     {
         // none of the properties are required, so we filter the empty ones.

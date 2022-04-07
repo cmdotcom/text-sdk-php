@@ -31,6 +31,7 @@ class ViewLocationDynamic extends ViewLocationBase
         $this->searchQuery = $SearchQuery;
     }
 
+	#[\ReturnTypeWillChange]
     public function jsonSerialize()
     {
         $return = [

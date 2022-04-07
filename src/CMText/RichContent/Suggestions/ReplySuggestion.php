@@ -30,6 +30,7 @@ class ReplySuggestion extends SuggestionBase
     }
 
 
+	#[\ReturnTypeWillChange]
     public function jsonSerialize()
     {
         return (object)array_filter([

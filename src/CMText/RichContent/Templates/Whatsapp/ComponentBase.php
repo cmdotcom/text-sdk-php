@@ -80,6 +80,7 @@ abstract class ComponentBase implements \JsonSerializable
     /**
      * @inheritDoc
      */
+	#[\ReturnTypeWillChange]
     public function jsonSerialize()
     {
         return $this;
