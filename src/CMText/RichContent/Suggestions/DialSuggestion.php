@@ -35,6 +35,7 @@ class DialSuggestion extends SuggestionBase
     }
 
 
+	#[\ReturnTypeWillChange]
     public function jsonSerialize()
     {
         return (object)[

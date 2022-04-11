@@ -68,6 +68,7 @@ class RichContent implements \JsonSerializable
     /**
      * @inheritDoc
      */
+	#[\ReturnTypeWillChange]
     public function jsonSerialize()
     {
         return (object)array_filter([

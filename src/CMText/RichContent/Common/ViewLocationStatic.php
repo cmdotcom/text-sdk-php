@@ -40,6 +40,7 @@ class ViewLocationStatic extends ViewLocationBase
     }
 
 
+	#[\ReturnTypeWillChange]
     public function jsonSerialize()
     {
         $return = [

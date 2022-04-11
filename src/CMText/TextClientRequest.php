@@ -44,6 +44,7 @@ class TextClientRequest implements JsonSerializable
     /**
      * @return object
      */
+	#[\ReturnTypeWillChange]
     public function jsonSerialize()
     {
         return (object)[

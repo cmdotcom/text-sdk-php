@@ -29,6 +29,7 @@ abstract class ComponentParameterBase implements \JsonSerializable
     /**
      * @inheritDoc
      */
+	#[\ReturnTypeWillChange]
     public function jsonSerialize()
     {
         return $this;

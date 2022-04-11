@@ -266,6 +266,7 @@ class Message implements JsonSerializable
     /**
      * @return object
      */
+	#[\ReturnTypeWillChange]
     public function jsonSerialize()
     {
         $return = [

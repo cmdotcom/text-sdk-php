@@ -67,6 +67,7 @@ class ContactName implements \JsonSerializable
     /**
      * @inheritDoc
      */
+	#[\ReturnTypeWillChange]
     public function jsonSerialize()
     {
         $required = [

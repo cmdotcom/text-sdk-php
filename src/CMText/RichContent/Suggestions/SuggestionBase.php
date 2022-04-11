@@ -20,5 +20,6 @@ abstract class SuggestionBase implements ISuggestion
     protected $label;
 
 
+	#[\ReturnTypeWillChange]
     abstract public function jsonSerialize();
 }

@@ -27,6 +27,7 @@ abstract class PaymentConfigurationBase implements JsonSerializable
     /**
      * @inheritDoc
      */
+	#[\ReturnTypeWillChange]
     public function jsonSerialize()
     {
         return $this;

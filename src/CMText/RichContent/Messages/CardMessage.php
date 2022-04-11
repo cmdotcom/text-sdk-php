@@ -39,6 +39,7 @@ class CardMessage implements IRichMessage
     }
 
 
+	#[\ReturnTypeWillChange]
     public function jsonSerialize()
     {
         return (object)[

@@ -95,6 +95,7 @@ class ContactAddress implements \JsonSerializable
     /**
      * @inheritDoc
      */
+	#[\ReturnTypeWillChange]
     public function jsonSerialize()
     {
         // none of these properties are required, so we filter the empty ones.
