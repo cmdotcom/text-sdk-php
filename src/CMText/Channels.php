@@ -49,8 +49,15 @@ class Channels
     /**
      * Send Apple Business Chat messages.
      * @note CM needs to configure this with you.
+     * @deprecated instead use APPLEMESSAGESFORBUSINESS
      */
     const IMESSAGE = 'iMessage';
+
+    /**
+     * Send Apple Messages For Business messages.
+     * @note CM needs to configure this with you.
+     */
+    const APPLEMESSAGESFORBUSINESS = 'Apple Messages for Business';
 
     /**
      * Send Line messages.
@@ -87,4 +94,10 @@ class Channels
      * @note CM needs to configure this with you.
      */
     const INSTAGRAM = 'Instagram';
+
+    /**
+     * Send Telegram messages.
+     * @note CM needs to configure this with you.
+     */
+    const TELEGRAM = 'Telegram Messenger';
 }

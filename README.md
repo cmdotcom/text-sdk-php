@@ -17,6 +17,8 @@ A software development kit to provide ways to interact with CM.com's Text servic
 ### Instantiate the client
 Using your unique `ApiKey` (or product token) which authorizes you on the CM platform. Always keep this key secret!
 
+The product token can be found in the [Channels](https://www.cm.com/app/channels) application on the platform, under the `Gateway` section.
+
 ```php
 $client = new \CMText\TextClient('your-api-key');
 ```

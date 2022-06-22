@@ -31,6 +31,11 @@ class Message implements JsonSerializable
     /**
      * @var string Sender name
      * @note Twitter requires the snowflake-id of the account you want to use as sender
+     * @note MobilePush: use the app key of the account you want to use as sender.
+     * @note Facebook Messenger: use the Facebook Page ID of the account you want to use as sender.
+     * @note Google Business Messages: use the Google Business Messages agent ID of the account you want to use as sender (without dashes).
+     * @note Instagram: use the Instagram Account ID of the account you want to use as sender.
+     * @note Telegram: use the Telegram Bot ID of the account you want to use as sender.
      */
     private $from;
 
@@ -42,6 +47,10 @@ class Message implements JsonSerializable
     /**
      * @var array List of Recipients
      * @note Twitter requires the snowflake-id
+     * @note Facebook Messenger: use the Facebook Page Scoped User ID (PSID).
+     * @note Google Business Messages: use the Google Business Messages conversation ID (without dashes).
+     * @note Instagram: use the Instagram Scoped User ID (IGSID).
+     * @note Telegram: use the Telegram Chat ID.
      */
     private $to = [];
 
