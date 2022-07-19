@@ -37,7 +37,7 @@ class TextMessage implements IRichMessage
     public function jsonSerialize()
     {
         return (object)array_filter([
-            'text' => $this->text
+            'text' => $this->text,
             'tag' => $this->tag
         ]);
     }
