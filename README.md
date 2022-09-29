@@ -173,3 +173,80 @@ $message
     );
 $result = $client->send( [$message] );
 ```
+
+## Sending WhatsApp interactive messages
+It is now possible to send list messages and reply buttons without using templates
+only supported in WhatsApp
+
+```php
+$client = new TextClient('your-api-key');
+$message = new Message('Message Text', 'Sender_name', ['Recipient_PhoneNumber']);
+$message
+    ->WithChannels([Channels::WHATSAPP])
+    ->WithRichMessage(
+        new WhatsAppInteractiveMessage(
+            new WhatsAppInteractiveContent(
+                WhatsAppInteractiveContentTypes::LIST,
+                new WhatsAppInteractiveHeader(
+                    WhatsAppInteractiveHeaderTypes::TEXT,
+                    'List message example'
+                ),
+                new WhatsAppInteractiveBody('checkout our list message demo'),
+                new WhatsAppInteractiveListAction(
+                    'Descriptive list title',
+                    [new WhatsAppInteractiveSection(
+                        'Select an option',
+                        [new WhatsAppInteractiveSectionRow(
+                            'unique title 1',
+                            rand(),
+                            'description text'
+                        ),new WhatsAppInteractiveSectionRow(
+                            'unique title 2',
+                            rand()
+                        )]
+                    )]
+                ),
+                new WhatsAppInteractiveFooter('footer text')
+            )
+        )
+    );
+$result = $client->send( [$message] );
+```
+
+Only with Reply buttons you can send media like image,video or document
+see following example.
+
+```php
+$client = new TextClient('your-api-key');
+$message = new Message('Message Text', 'Sender_name', ['Recipient_PhoneNumber']);
+$message
+    ->WithChannels([Channels::WHATSAPP])
+    ->WithRichMessage(
+        new WhatsAppInteractiveMessage(
+            new WhatsAppInteractiveContent(
+                WhatsAppInteractiveContentTypes::BUTTON,
+                new WhatsAppInteractiveHeader(
+                    WhatsAppInteractiveHeaderTypes::IMAGE,
+                    null,
+                    new MediaContent(
+                        'media name',
+                        'media.url',
+                        'mime/type'
+                    )
+                ),
+                new WhatsAppInteractiveBody('checkout our list message demo'),
+                new WhatsAppInteractiveButtonAction(
+                    [new WhatsAppInteractiveReplyButton(
+                        'button 1 reply-text',
+                        rand()
+                    ),new WhatsAppInteractiveReplyButton(
+                        'button 2 title',
+                        rand()
+                    )]
+                ),
+                new WhatsAppInteractiveFooter('footer text')
+            )
+        )
+    );
+$result = $client->send( [$message] );
+```
