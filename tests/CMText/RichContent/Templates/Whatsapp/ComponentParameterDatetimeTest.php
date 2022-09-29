@@ -21,9 +21,7 @@ class ComponentParameterDatetimeTest extends TestCase
 
     public function testJsonSerialize()
     {
-        $datetime = (new \DateTimeImmutable)->setTimestamp(
-            rand(time(), time()*2)
-        );
+        $datetime = new \DateTimeImmutable();
 
         $componentParameter = new ComponentParameterDatetime(
             $datetime->format(DATE_COOKIE),
