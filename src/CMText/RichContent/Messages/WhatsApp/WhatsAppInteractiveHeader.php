@@ -28,7 +28,7 @@ class WhatsAppInteractiveHeader
         }
 
         $this->type = $type;
-        $this->text = strlen($text) < 1 ? null : $text;
+        $this->text = !$text ? null : $text;
         $this->media = $media;
     }
 }
