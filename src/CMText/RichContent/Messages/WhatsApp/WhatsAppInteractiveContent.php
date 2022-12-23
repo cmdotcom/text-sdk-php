@@ -35,7 +35,7 @@ class WhatsAppInteractiveContent implements \JsonSerializable
             $type,
             (new \ReflectionClass(WhatsAppInteractiveContentTypes::class))->getConstants())
         ){
-            throw new \Exception("Unsupport WhatsApp-InteractiveContent-type $type");
+            throw new \Exception("Unsupported WhatsApp-InteractiveContent-type $type");
         }
 
         //  action is always required.
@@ -50,7 +50,7 @@ class WhatsAppInteractiveContent implements \JsonSerializable
 
         //  body is optional for type Product, otherwise required.
         if($type != WhatsAppInteractiveContentTypes::PRODUCT && $body == null){
-            throw new \Exception("Body is Required for $type");
+            throw new \Exception("Body is required for type $type");
         }
 
         $this->type = $type;
