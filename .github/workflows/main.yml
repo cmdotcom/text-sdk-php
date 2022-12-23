@@ -1,11 +1,6 @@
-name: Build , Test and Coverage
+name: build and test
 
-on:
-  push:
-    branches: [ github-actions ]
-  pull_request:
-    branches: [ github-actions ]
-  workflow_dispatch:
+on: [push, pull_request, workflow_dispatch]
 
 permissions:
   contents: read

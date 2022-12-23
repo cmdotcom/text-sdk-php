@@ -1,4 +1,4 @@
-[![Build Status](https://travis-ci.com/cmdotcom/text-sdk-php.svg?branch=master)](https://travis-ci.com/cmdotcom/text-sdk-php)
+[![GitHub Workflow](https://github.com/cmdotcom/text-sdk-php/actions/workflows/main.yml/badge.svg)](https://github.com/cmdotcom/text-sdk-php/actions/workflows/main.yml)
 [![codecov](https://codecov.io/gh/cmdotcom/text-sdk-php/branch/master/graph/badge.svg)](https://codecov.io/gh/cmdotcom/text-sdk-php)
 [![Packagist](https://img.shields.io/packagist/dm/cmdotcom/text-sdk-php)](https://packagist.org/packages/cmdotcom/text-sdk-php)
 
