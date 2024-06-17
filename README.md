@@ -4,7 +4,7 @@
 
 # CM Text SDK
 A software development kit to provide ways to interact with CM.com's Text service. API used:
-- [Business Messaging](https://docs.cmtelecom.com/business-messaging/v1.0)
+- [Business Messaging](https://developers.cm.com/messaging/docs)
 
 
 ### Requirements
@@ -83,7 +83,7 @@ $result = $client->send( [$message] );
 
 ## Sending a WhatsApp template message
 By using the `Message` class it is possible to create template messages. Please note that this is WhatsApp only and your template needs to be approved before sending.
-For more info please check our documentation: https://docs.cmtelecom.com/en/api/business-messaging-api/1.0/index#whatsapp-template-message
+For more info please check our documentation: https://www.cm.com/en-en/app/docs/api/business-messaging-api/1.0/index#whatsapp-template-message
 ```php
 $client = new TextClient('your-api-key');
 $message = new Message('Message Text', 'Sender_name', ['Recipient_PhoneNumber']);
