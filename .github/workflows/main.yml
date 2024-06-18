@@ -71,6 +71,7 @@ jobs:
       with:
         name: code-coverage-report
         path: coverage.xml
+        overwrite: true
         retention-days: 1
 
 
