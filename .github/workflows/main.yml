@@ -14,11 +14,11 @@ jobs:
       max-parallel: 2
 
     steps:
-    - uses: actions/checkout@v3
+    - uses: actions/checkout@v4
 
     - name: Cache Composer packages
       id: composer-cache
-      uses: actions/cache@v3
+      uses: actions/cache@v4
       with:
         path: vendor
         key: php-${{ matrix.version }}-${{ github.ref }}
@@ -45,7 +45,7 @@ jobs:
       max-parallel: 1
 
     steps:
-    - uses: actions/checkout@v3
+    - uses: actions/checkout@v4
 
     - name: Setup PHP
       id: setup-php
@@ -58,7 +58,7 @@ jobs:
 
     - name: Cache Composer packages
       id: composer-cache
-      uses: actions/cache@v3
+      uses: actions/cache@v4
       with:
         path: vendor
         key: php-${{ matrix.version }}-${{ github.ref }}
@@ -67,10 +67,11 @@ jobs:
       run: php vendor/bin/phpunit --coverage-clover=coverage.xml --whitelist=./src ./tests
       
     - name: Archive code coverage results
-      uses: actions/upload-artifact@v3
+      uses: actions/upload-artifact@v4
       with:
         name: code-coverage-report
         path: coverage.xml
+        overwrite: true
         retention-days: 1
 
 
@@ -80,15 +81,15 @@ jobs:
     
     steps:
       - name: Checkout
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
       - name: Download code coverage results
-        uses: actions/download-artifact@v3
+        uses: actions/download-artifact@v4
         with:
           name: code-coverage-report
 
       - name: Upload coverage to Codecov
-        uses: codecov/codecov-action@v3
+        uses: codecov/codecov-action@v4
         with:
           files: ./coverage.xml
           token: ${{ secrets.CODECOV_TOKEN }}
