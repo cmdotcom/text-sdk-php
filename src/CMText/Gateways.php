@@ -24,4 +24,28 @@ class Gateways
      * Alternative Global endpoint
      */
     const GLOBAL_ALTERNATIVE = 'https://gw.cmtelecom.com/v1.0/message';
+
+    /**
+     * China local gateway
+     *
+     * @deprecated Instead use {@see \CMText\Gateways::GLOBAL}
+     * @see \CMText\Gateways::GLOBAL
+     */
+    const CN = 'https://gw-cn.cmtelecom.com/v1.0/message';
+
+    /**
+     * Hong Kong local gateway
+     *
+     * @deprecated Instead use {@see \CMText\Gateways::GLOBAL}
+     * @see \CMText\Gateways::GLOBAL
+     */
+    const HK = 'https://gw-hk.cmtelecom.cn/v1.0/message';
+
+    /**
+     * United Kingdom local gateway
+     *
+     * @deprecated Instead use {@see \CMText\Gateways::GLOBAL}
+     * @see \CMText\Gateways::GLOBAL
+     */
+    const UK = 'https://gw-uk.cmtelecom.com/v1.0/message';
 }
