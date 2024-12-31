@@ -19,9 +19,8 @@ class ComponentParameterTextTest extends TestCase
             $json->type
         );
 
-        $this->assertObjectHasAttribute(
-            'text',
-            $json
+        $this->assertTrue(
+            property_exists($json, 'text')
         );
     }
 }

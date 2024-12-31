@@ -26,9 +26,9 @@ class TextClientResult
      * TextClientResult constructor.
      *
      * @param int    $httpStatusCode
-     * @param string $responseBody
+     * @param string|null $responseBody
      */
-    public function __construct(int $httpStatusCode, $responseBody = '')
+    public function __construct(int $httpStatusCode, ?string $responseBody = '')
     {
         $this->httpStatusCode = $httpStatusCode;
         $this->response = $responseBody;

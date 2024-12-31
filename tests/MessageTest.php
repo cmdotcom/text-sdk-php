@@ -168,24 +168,20 @@ class MessageTest extends TestCase
 
         $json = json_decode(json_encode($message));
 
-        $this->assertObjectHasAttribute(
-            'richContent',
-            $json
+        $this->assertTrue(
+            property_exists($json, 'richContent')
         );
 
-        $this->assertObjectHasAttribute(
-            'conversation',
-            $json->richContent
+        $this->assertTrue(
+            property_exists($json->richContent, 'conversation')
         );
 
-        $this->assertObjectHasAttribute(
-            'template',
-            $json->richContent->conversation[0]
+        $this->assertTrue(
+            property_exists($json->richContent->conversation[0], 'template')
         );
 
-        $this->assertObjectHasAttribute(
-            'whatsapp',
-            $json->richContent->conversation[0]->template
+        $this->assertTrue(
+            property_exists($json->richContent->conversation[0]->template, 'whatsapp')
         );
     }
 
@@ -221,24 +217,20 @@ class MessageTest extends TestCase
 
         $json = json_decode(json_encode($message));
 
-        $this->assertObjectHasAttribute(
-            'richContent',
-            $json
+        $this->assertTrue(
+            property_exists($json, 'richContent')
         );
 
-        $this->assertObjectHasAttribute(
-            'conversation',
-            $json->richContent
+        $this->assertTrue(
+            property_exists($json->richContent, 'conversation')
         );
 
-        $this->assertObjectHasAttribute(
-            'payment',
-            $json->richContent->conversation[0]
+        $this->assertTrue(
+            property_exists($json->richContent->conversation[0], 'payment')
         );
 
-        $this->assertObjectHasAttribute(
-            'lineItems',
-            $json->richContent->conversation[0]->payment
+        $this->assertTrue(
+            property_exists($json->richContent->conversation[0]->payment, 'lineItems')
         );
     }
 

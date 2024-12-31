@@ -34,9 +34,8 @@ class PaymentMessageTest extends TestCase
 
         $json = json_decode(json_encode($message));
 
-        $this->assertObjectHasAttribute(
-            'payment',
-            $json
+        $this->assertTrue(
+            property_exists($json, 'payment')
         );
     }
 }

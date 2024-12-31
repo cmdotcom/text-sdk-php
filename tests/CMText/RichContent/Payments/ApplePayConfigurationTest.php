@@ -31,59 +31,48 @@ class ApplePayConfigurationTest extends TestCase
 
         $json = json_decode(json_encode($configuration));
 
-        $this->assertObjectHasAttribute(
-            'merchantName',
-            $json
+        $this->assertTrue(
+            property_exists($json, 'merchantName')
         );
 
-        $this->assertObjectHasAttribute(
-            'description',
-            $json
+        $this->assertTrue(
+            property_exists($json, 'description')
         );
 
-        $this->assertObjectHasAttribute(
-            'orderReference',
-            $json
+        $this->assertTrue(
+            property_exists($json, 'orderReference')
         );
 
-        $this->assertObjectHasAttribute(
-            'total',
-            $json
+        $this->assertTrue(
+            property_exists($json, 'total')
         );
 
-        $this->assertObjectHasAttribute(
-            'currencyCode',
-            $json
+        $this->assertTrue(
+            property_exists($json, 'currencyCode')
         );
 
-        $this->assertObjectHasAttribute(
-            'recipientEmail',
-            $json
+        $this->assertTrue(
+            property_exists($json, 'recipientEmail')
         );
 
-        $this->assertObjectHasAttribute(
-            'recipientCountryCode',
-            $json
+        $this->assertTrue(
+            property_exists($json, 'recipientCountryCode')
         );
 
-        $this->assertObjectHasAttribute(
-            'languageCountryCode',
-            $json
+        $this->assertTrue(
+            property_exists($json, 'languageCountryCode')
         );
 
-        $this->assertObjectHasAttribute(
-            'billingAddressRequired',
-            $json
+        $this->assertTrue(
+            property_exists($json, 'billingAddressRequired')
         );
 
-        $this->assertObjectHasAttribute(
-            'shippingContactRequired',
-            $json
+        $this->assertTrue(
+            property_exists($json, 'shippingContactRequired')
         );
 
-        $this->assertObjectHasAttribute(
-            'lineItems',
-            $json
+        $this->assertTrue(
+            property_exists($json, 'lineItems')
         );
     }
 }

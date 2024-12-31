@@ -106,11 +106,16 @@ class Message implements JsonSerializable
      *
      * @param string|MessageBody $body
      * @param string|null $from
-     * @param array $to
+     * @param array|null $to
      * @param string|null $reference
      * @throws \CMText\Exceptions\RecipientLimitException
      */
-    public function __construct($body = '', string $from = null, array $to = [], string $reference = null)
+    public function __construct(
+        $body = '',
+        ?string $from = null,
+        ?array $to = [],
+        ?string $reference = null
+    )
     {
         $this->__set('body', $body);
         $this->__set('from', $from);

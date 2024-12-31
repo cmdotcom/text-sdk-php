@@ -32,7 +32,7 @@ class TextClient implements ITextClient
     /**
      * SDK Version constant
      */
-    const VERSION = '2.3.1';
+    const VERSION = '3.0.0';
 
 
     /**
@@ -70,7 +70,7 @@ class TextClient implements ITextClient
         string $message,
         string $from,
         array $to,
-        string $reference = null
+        ?string $reference = null
     )
     {
         // send it out instantly

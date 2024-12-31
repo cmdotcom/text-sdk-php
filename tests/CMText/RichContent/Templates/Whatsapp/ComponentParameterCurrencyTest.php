@@ -21,19 +21,16 @@ class ComponentParameterCurrencyTest extends TestCase
 
         $json = json_decode( json_encode($currency) );
 
-        $this->assertObjectHasAttribute(
-            'currency',
-            $json
+        $this->assertTrue(
+            property_exists($json, 'currency')
         );
 
-        $this->assertObjectHasAttribute(
-            'code',
-            $json->currency
+        $this->assertTrue(
+            property_exists($json->currency, 'code')
         );
 
-        $this->assertObjectHasAttribute(
-            'amount_1000',
-            $json->currency
+        $this->assertTrue(
+            property_exists($json->currency, 'amount_1000')
         );
 
         $this->assertEquals(
@@ -41,9 +38,8 @@ class ComponentParameterCurrencyTest extends TestCase
             $json->currency->amount_1000
         );
 
-        $this->assertObjectHasAttribute(
-            'fallback_value',
-            $json->currency
+        $this->assertTrue(
+            property_exists($json->currency, 'fallback_value')
         );
     }
 

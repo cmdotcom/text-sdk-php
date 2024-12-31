@@ -29,9 +29,8 @@ class RichMessageTest extends TestCase
 
         $json = $richText->jsonSerialize();
 
-        $this->assertObjectHasAttribute(
-            'text',
-            $json
+        $this->assertTrue(
+            property_exists($json, 'text')
         );
     }
 
@@ -71,30 +70,24 @@ class RichMessageTest extends TestCase
 
         $json = json_decode( json_encode($richCard) );
 
-        $this->assertObjectHasAttribute(
-            'text',
-            $json
+        $this->assertTrue(
+            property_exists($json, 'text')
         );
-        $this->assertObjectHasAttribute(
-            'header',
-            $json
+        $this->assertTrue(
+            property_exists($json, 'header')
         );
-        $this->assertObjectHasAttribute(
-            'media',
-            $json
+        $this->assertTrue(
+            property_exists($json, 'media')
         );
 
-        $this->assertObjectHasAttribute(
-            'mediaName',
-            $json->media
+        $this->assertTrue(
+            property_exists($json->media, 'mediaName')
         );
-        $this->assertObjectHasAttribute(
-            'mediaUri',
-            $json->media
+        $this->assertTrue(
+            property_exists($json->media, 'mediaUri')
         );
-        $this->assertObjectHasAttribute(
-            'mimeType',
-            $json->media
+        $this->assertTrue(
+            property_exists($json->media, 'mimeType')
         );
     }
 
@@ -135,23 +128,20 @@ class RichMessageTest extends TestCase
 
         $json = json_decode( json_encode($carousel) );
 
-        $this->assertObjectHasAttribute(
-            'carousel',
-            $json
+        $this->assertTrue(
+            property_exists($json, 'carousel')
         );
 
-        $this->assertObjectHasAttribute(
-            'cardWidth',
-            $json->carousel
+        $this->assertTrue(
+            property_exists($json->carousel, 'cardWidth')
         );
         $this->assertEquals(
             \CMText\RichContent\Messages\CarouselCardWidth::MEDIUM,
             $json->carousel->cardWidth
         );
 
-        $this->assertObjectHasAttribute(
-            'cards',
-            $json->carousel
+        $this->assertTrue(
+            property_exists($json->carousel, 'cards')
         );
         $this->assertCount(
             2,
@@ -178,22 +168,18 @@ class RichMessageTest extends TestCase
 
         $json = json_decode( json_encode($media) );
 
-        $this->assertObjectHasAttribute(
-            'media',
-            $json
+        $this->assertTrue(
+            property_exists($json, 'media')
         );
 
-        $this->assertObjectHasAttribute(
-            'mediaName',
-            $json->media
+        $this->assertTrue(
+            property_exists($json->media, 'mediaName')
         );
-        $this->assertObjectHasAttribute(
-            'mediaUri',
-            $json->media
+        $this->assertTrue(
+            property_exists($json->media, 'mediaUri')
         );
-        $this->assertObjectHasAttribute(
-            'mimeType',
-            $json->media
+        $this->assertTrue(
+            property_exists($json->media, 'mimeType')
         );
     }
 
@@ -256,22 +242,18 @@ class RichMessageTest extends TestCase
 
         $json = json_decode( json_encode($location) );
 
-        $this->assertObjectHasAttribute(
-            'location',
-            $json
+        $this->assertTrue(
+            property_exists($json, 'location')
         );
 
-        $this->assertObjectHasAttribute(
-            'label',
-            $json->location
+        $this->assertTrue(
+            property_exists($json->location, 'label')
         );
-        $this->assertObjectHasAttribute(
-            'searchQuery',
-            $json->location
+        $this->assertTrue(
+            property_exists($json->location, 'searchQuery')
         );
-        $this->assertObjectNotHasAttribute(
-            'radius',
-            $json->location
+        $this->assertFalse(
+            property_exists($json->location, 'radius')
         );
 
 
@@ -295,26 +277,21 @@ class RichMessageTest extends TestCase
 
         $json = json_decode( json_encode($location) );
 
-        $this->assertObjectHasAttribute(
-            'location',
-            $json
+        $this->assertTrue(
+            property_exists($json, 'location')
         );
 
-        $this->assertObjectHasAttribute(
-            'latitude',
-            $json->location
+        $this->assertTrue(
+            property_exists($json->location, 'latitude')
         );
-        $this->assertObjectHasAttribute(
-            'longitude',
-            $json->location
+        $this->assertTrue(
+            property_exists($json->location, 'longitude')
         );
-        $this->assertObjectHasAttribute(
-            'label',
-            $json->location
+        $this->assertTrue(
+            property_exists($json->location, 'label')
         );
-        $this->assertObjectHasAttribute(
-            'radius',
-            $json->location
+        $this->assertTrue(
+            property_exists($json->location, 'radius')
         );
     }
 
@@ -354,17 +331,15 @@ class RichMessageTest extends TestCase
 
         $json = json_decode(json_encode($contactsMessage));
 
-        $this->assertObjectHasAttribute(
-            'contacts',
-            $json
+        $this->assertTrue(
+            property_exists($json, 'contacts')
         );
         $this->assertCount(
             2,
             $json->contacts
         );
-        $this->assertObjectHasAttribute(
-            'org',
-            $json->contacts[0]
+        $this->assertTrue(
+            property_exists($json->contacts[0], 'org')
         );
     }
 }

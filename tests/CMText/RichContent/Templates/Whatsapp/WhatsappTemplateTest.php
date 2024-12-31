@@ -102,9 +102,8 @@ class WhatsappTemplateTest extends TestCase
             json_encode($whatsappTemplate)
         );
         
-        $this->assertObjectHasAttribute(
-            'components',
-            $json->whatsapp
+        $this->assertTrue(
+            property_exists($json->whatsapp, 'components')
         );
     }
 }
