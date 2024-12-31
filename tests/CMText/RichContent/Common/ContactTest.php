@@ -30,31 +30,37 @@ class ContactTest extends TestCase
 
     public function testAddUrl()
     {
-        $this->assertObjectHasAttribute(
-            'urls',
-            (new Contact(
-                $this->contactProperties['url']
-            ))->jsonSerialize()
+        $this->assertTrue(
+            property_exists(
+                (new Contact(
+                    $this->contactProperties['url']
+                ))->jsonSerialize(),
+                'urls'
+            )
         );
     }
 
     public function testAddPhonenumber()
     {
-        $this->assertObjectHasAttribute(
-            'phones',
-            (new Contact(
-                $this->contactProperties['phonenumber']
-            ))->jsonSerialize()
+        $this->assertTrue(
+            property_exists(
+                (new Contact(
+                    $this->contactProperties['phonenumber']
+                ))->jsonSerialize(),
+                'phones'
+            )
         );
     }
 
     public function testSetOrganization()
     {
-        $this->assertObjectHasAttribute(
-            'org',
-            (new Contact(
-                $this->contactProperties['organization']
-            ))->jsonSerialize()
+        $this->assertTrue(
+            property_exists(
+                (new Contact(
+                    $this->contactProperties['organization']
+                ))->jsonSerialize(),
+                'org'
+            )
         );
     }
 
@@ -95,41 +101,49 @@ class ContactTest extends TestCase
 
     public function testSetBirthday()
     {
-        $this->assertObjectHasAttribute(
-            'birthday',
-            (new Contact(
-                $this->contactProperties['birthday']
-            ))->jsonSerialize()
+        $this->assertTrue(
+            property_exists(
+                (new Contact(
+                    $this->contactProperties['birthday']
+                ))->jsonSerialize(),
+                'birthday'
+            )
         );
     }
 
     public function testSetName()
     {
-        $this->assertObjectHasAttribute(
-            'name',
-            (new Contact(
-                $this->contactProperties['name']
-            ))->jsonSerialize()
+        $this->assertTrue(
+            property_exists(
+                (new Contact(
+                    $this->contactProperties['name']
+                ))->jsonSerialize(),
+                'name'
+            )
         );
     }
 
     public function testAddEmail()
     {
-        $this->assertObjectHasAttribute(
-            'emails',
-            (new Contact(
-                $this->contactProperties['email']
-            ))->jsonSerialize()
+        $this->assertTrue(
+            property_exists(
+                (new Contact(
+                    $this->contactProperties['email']
+                ))->jsonSerialize(),
+                'emails'
+            )
         );
     }
 
     public function testAddAddress()
     {
-        $this->assertObjectHasAttribute(
-            'addresses',
-            (new Contact(
-                $this->contactProperties['address']
-            ))->jsonSerialize()
+        $this->assertTrue(
+            property_exists(
+                (new Contact(
+                    $this->contactProperties['address']
+                ))->jsonSerialize(),
+                'addresses'
+            )
         );
     }
 

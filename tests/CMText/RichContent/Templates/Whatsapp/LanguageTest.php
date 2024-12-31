@@ -15,14 +15,18 @@ class LanguageTest extends TestCase
             json_encode($language)
         );
 
-        $this->assertObjectHasAttribute(
-            'code',
-            json_decode( json_encode($language) )
+        $this->assertTrue(
+            property_exists(
+                json_decode( json_encode($language) ),
+                'code'
+            )
         );
 
-        $this->assertObjectHasAttribute(
-            'policy',
-            json_decode( json_encode($language) )
+        $this->assertTrue(
+            property_exists(
+                json_decode( json_encode($language) ),
+                'policy'
+            )
         );
     }
 

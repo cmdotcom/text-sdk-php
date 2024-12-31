@@ -25,10 +25,10 @@ class WhatsAppInteractiveContent implements \JsonSerializable
      */
     public function __construct(
         string $type,
-        WhatsAppInteractiveHeader $header = null,
-        WhatsAppInteractiveBody $body = null,
-        IWhatsAppInteractiveAction $action = null,
-        WhatsAppInteractiveFooter $footer = null
+        ?WhatsAppInteractiveHeader $header = null,
+        ?WhatsAppInteractiveBody $body = null,
+        ?IWhatsAppInteractiveAction $action = null,
+        ?WhatsAppInteractiveFooter $footer = null
     )
     {
         if( !in_array(

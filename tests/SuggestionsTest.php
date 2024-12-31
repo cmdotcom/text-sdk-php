@@ -8,14 +8,16 @@ class SuggestionsTest extends TestCase
 
     public function testBaseClassProperties()
     {
-        $this->assertClassHasAttribute(
-            'action',
+        $suggestionBase = $this->getMockForAbstractClass(
             \CMText\RichContent\Suggestions\SuggestionBase::class
         );
 
-        $this->assertClassHasAttribute(
-            'label',
-            \CMText\RichContent\Suggestions\SuggestionBase::class
+        $this->assertTrue(
+            property_exists($suggestionBase, 'action')
+        );
+
+        $this->assertTrue(
+            property_exists($suggestionBase, 'label')
         );
     }
 
@@ -42,26 +44,21 @@ class SuggestionsTest extends TestCase
 
         $json = json_decode( json_encode($calendar) );
 
-        $this->assertObjectHasAttribute(
-            'calendar',
-            $json
+        $this->assertTrue(
+            property_exists($json, 'calendar')
         );
 
-        $this->assertObjectHasAttribute(
-            'startTime',
-            $json->calendar
+        $this->assertTrue(
+            property_exists($json->calendar, 'startTime')
         );
-        $this->assertObjectHasAttribute(
-            'endTime',
-            $json->calendar
+        $this->assertTrue(
+            property_exists($json->calendar, 'endTime')
         );
-        $this->assertObjectHasAttribute(
-            'title',
-            $json->calendar
+        $this->assertTrue(
+            property_exists($json->calendar, 'title')
         );
-        $this->assertObjectHasAttribute(
-            'description',
-            $json->calendar
+        $this->assertTrue(
+            property_exists($json->calendar, 'description')
         );
     }
 
@@ -83,14 +80,12 @@ class SuggestionsTest extends TestCase
 
         $json = json_decode( json_encode($dial) );
 
-        $this->assertObjectHasAttribute(
-            'dial',
-            $json
+        $this->assertTrue(
+            property_exists($json, 'dial')
         );
 
-        $this->assertObjectHasAttribute(
-            'PhoneNumber',
-            $json->dial
+        $this->assertTrue(
+            property_exists($json->dial, 'PhoneNumber')
         );
 
     }
@@ -111,9 +106,11 @@ class SuggestionsTest extends TestCase
             $openUrl
         );
 
-        $this->assertObjectHasAttribute(
-            'url',
-            json_decode( json_encode($openUrl) )
+        $this->assertTrue(
+            property_exists(
+                json_decode( json_encode($openUrl) ),
+                'url'
+            )
         );
     }
 
@@ -133,9 +130,11 @@ class SuggestionsTest extends TestCase
             $reply
         );
 
-        $this->assertObjectHasAttribute(
-            'postbackdata',
-            json_decode( json_encode($reply) )
+        $this->assertTrue(
+            property_exists(
+                json_decode( json_encode($reply) ),
+                'postbackdata'
+            )
         );
     }
 
@@ -160,26 +159,21 @@ class SuggestionsTest extends TestCase
 
         $json = json_decode( json_encode($viewStaticLocation) );
 
-        $this->assertObjectHasAttribute(
-            'viewLocation',
-            $json
+        $this->assertTrue(
+            property_exists($json, 'viewLocation')
         );
 
-        $this->assertObjectHasAttribute(
-            'latitude',
-            $json->viewLocation
+        $this->assertTrue(
+            property_exists($json->viewLocation, 'latitude')
         );
-        $this->assertObjectHasAttribute(
-            'longitude',
-            $json->viewLocation
+        $this->assertTrue(
+            property_exists($json->viewLocation, 'longitude')
         );
-        $this->assertObjectHasAttribute(
-            'label',
-            $json->viewLocation
+        $this->assertTrue(
+            property_exists($json->viewLocation, 'label')
         );
-        $this->assertObjectNotHasAttribute(
-            'radius',
-            $json->viewLocation
+        $this->assertFalse(
+            property_exists($json->viewLocation, 'radius')
         );
 
 
@@ -201,22 +195,18 @@ class SuggestionsTest extends TestCase
 
         $json = json_decode( json_encode($viewDynamicLocation) );
 
-        $this->assertObjectHasAttribute(
-            'viewLocation',
-            $json
+        $this->assertTrue(
+            property_exists($json, 'viewLocation')
         );
 
-        $this->assertObjectHasAttribute(
-            'label',
-            $json->viewLocation
+        $this->assertTrue(
+            property_exists($json->viewLocation, 'label')
         );
-        $this->assertObjectHasAttribute(
-            'searchQuery',
-            $json->viewLocation
+        $this->assertTrue(
+            property_exists($json->viewLocation, 'searchQuery')
         );
-        $this->assertObjectHasAttribute(
-            'radius',
-            $json->viewLocation
+        $this->assertTrue(
+            property_exists($json->viewLocation, 'radius')
         );
     }
 

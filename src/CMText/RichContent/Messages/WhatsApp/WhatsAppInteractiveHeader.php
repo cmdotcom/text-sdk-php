@@ -14,14 +14,14 @@ class WhatsAppInteractiveHeader
 
     /**
      * @param string $type
-     * @param string $text
+     * @param string|null $text
      * @param MediaContent|null $media
      * @throws \Exception
      */
     public function __construct(
         string $type,
-        string $text = null,
-        MediaContent $media = null)
+        ?string $text = null,
+        ?MediaContent $media = null)
     {
         if( !in_array($type, (new \ReflectionClass(WhatsAppInteractiveHeaderTypes::class))->getConstants()) ){
             throw new \Exception("Unsupported WhatsApp-InteractiveHeader-type $type");

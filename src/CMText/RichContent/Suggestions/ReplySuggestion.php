@@ -22,7 +22,7 @@ class ReplySuggestion extends SuggestionBase
 
     public function __construct(
         string $Label,
-        string $Text = null
+        ?string $Text = null
     )
     {
         $this->label = $Label;

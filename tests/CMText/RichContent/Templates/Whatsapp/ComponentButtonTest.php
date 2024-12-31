@@ -21,9 +21,8 @@ class ComponentButtonTest extends TestCase
             $json->type
         );
 
-        $this->assertObjectHasAttribute(
-            'index',
-            $json
+        $this->assertTrue(
+            property_exists($json, 'index')
         );
     }
 }

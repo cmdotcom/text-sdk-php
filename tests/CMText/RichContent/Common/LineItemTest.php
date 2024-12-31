@@ -17,19 +17,16 @@ class LineItemTest extends TestCase
 
         $json = json_decode(json_encode($lineitem));
 
-        $this->assertObjectHasAttribute(
-            'label',
-            $json
+        $this->assertTrue(
+            property_exists($json, 'label')
         );
 
-        $this->assertObjectHasAttribute(
-            'type',
-            $json
+        $this->assertTrue(
+            property_exists($json, 'type')
         );
 
-        $this->assertObjectHasAttribute(
-            'amount',
-            $json
+        $this->assertTrue(
+            property_exists($json, 'amount')
         );
     }
 }

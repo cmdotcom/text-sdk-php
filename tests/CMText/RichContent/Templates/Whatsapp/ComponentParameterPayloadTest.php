@@ -18,9 +18,8 @@ class ComponentParameterPayloadTest extends TestCase
             $json->type
         );
 
-        $this->assertObjectHasAttribute(
-            'payload',
-            $json
+        $this->assertTrue(
+            property_exists($json, 'payload')
         );
     }
 }

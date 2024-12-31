@@ -19,7 +19,7 @@ class WhatsAppInteractiveSectionRow
     public function __construct(
         string $title,
         string $id,
-        string $description = null
+        ?string $description = null
     )
     {
         $this->title = $title;

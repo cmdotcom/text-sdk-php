@@ -25,9 +25,8 @@ class ComponentParameterImageTest extends TestCase
             $json->type
         );
 
-        $this->assertObjectHasAttribute(
-            'media',
-            $json
+        $this->assertTrue(
+            property_exists($json, 'media')
         );
     }
 }

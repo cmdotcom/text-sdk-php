@@ -22,7 +22,7 @@ interface ITextClient
      * @param string $message - Message body to send
      * @param string $from - Sender name
      * @param array $to - Recipient phonenumbers
-     * @param string $reference optional
+     * @param string|null $reference optional
      *
      * @return TextClientResult
      */
@@ -30,7 +30,7 @@ interface ITextClient
         string $message,
         string $from,
         array $to,
-        string $reference = null
+        ?string $reference = null
     );
 
     /**

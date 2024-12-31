@@ -70,7 +70,7 @@ class TextClient implements ITextClient
         string $message,
         string $from,
         array $to,
-        string $reference = null
+        ?string $reference = null
     )
     {
         // send it out instantly
