@@ -16,7 +16,7 @@ class ContactsMessage implements IRichMessage
     /**
      * @var Contact[]
      */
-    private $contacts = [];
+    public $contacts = [];
 
     /**
      * ContactsMessage constructor.
