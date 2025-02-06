@@ -2,17 +2,20 @@
 
 namespace CMText\RichContent\Messages;
 
+use CMText\RichContent\Messages\WhatsApp\WhatsAppMessageContextTrait;
+
 /**
  * Class MediaMessage
  * @package CMText\RichContent\Messages
  */
 class MediaMessage implements IRichMessage
 {
+    use WhatsAppMessageContextTrait;
 
     /**
      * @var \CMText\RichContent\Messages\MediaContent
      */
-    private $content;
+    public $media;
 
 
     /**
@@ -27,15 +30,13 @@ class MediaMessage implements IRichMessage
         string $Mimetype
     )
     {
-        $this->content = new MediaContent($Name, $Uri, $Mimetype);
+        $this->media = new MediaContent($Name, $Uri, $Mimetype);
     }
 
 
 	#[\ReturnTypeWillChange]
     public function jsonSerialize()
     {
-        return (object)[
-            'media' => $this->content,
-        ];
+        return $this;
     }
 }

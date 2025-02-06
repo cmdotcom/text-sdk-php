@@ -3,6 +3,7 @@
 namespace CMText\RichContent\Messages;
 
 use CMText\RichContent\Common\ViewLocationBase;
+use CMText\RichContent\Messages\WhatsApp\WhatsAppMessageContextTrait;
 
 /**
  * Class LocationPushMessage
@@ -10,10 +11,12 @@ use CMText\RichContent\Common\ViewLocationBase;
  */
 class LocationPushMessage implements IRichMessage
 {
+    use WhatsAppMessageContextTrait;
+
     /**
      * @var \CMText\RichContent\Common\ViewLocationBase Location to send.
      */
-    private $location;
+    public $location;
 
 
     /**
@@ -31,8 +34,6 @@ class LocationPushMessage implements IRichMessage
 	#[\ReturnTypeWillChange]
     public function jsonSerialize()
     {
-        return (object)[
-            'location' => $this->location,
-        ];
+        return $this;
     }
 }

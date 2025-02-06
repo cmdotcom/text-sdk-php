@@ -3,6 +3,7 @@
 namespace CMText\RichContent\Messages;
 
 use CMText\RichContent\Common\Contact;
+use CMText\RichContent\Messages\WhatsApp\WhatsAppMessageContextTrait;
 
 /**
  * Class ContactsMessage
@@ -10,14 +11,16 @@ use CMText\RichContent\Common\Contact;
  */
 class ContactsMessage implements IRichMessage
 {
+    use WhatsAppMessageContextTrait;
+
     /**
-     * @var \CMText\RichContent\Common\Contact[]
+     * @var Contact[]
      */
     private $contacts = [];
 
     /**
      * ContactsMessage constructor.
-     * @param \CMText\RichContent\Common\Contact $Contact
+     * @param Contact $Contact
      */
     public function __construct(Contact $Contact)
     {
@@ -25,7 +28,7 @@ class ContactsMessage implements IRichMessage
     }
 
     /**
-     * @param \CMText\RichContent\Common\Contact $Contact
+     * @param Contact $Contact
      */
     public function addContact(Contact $Contact)
     {
@@ -38,9 +41,7 @@ class ContactsMessage implements IRichMessage
 	#[\ReturnTypeWillChange]
     public function jsonSerialize()
     {
-        return (object)[
-            'contacts' => array_filter($this->contacts),
-        ];
+        return $this;
     }
 }
 

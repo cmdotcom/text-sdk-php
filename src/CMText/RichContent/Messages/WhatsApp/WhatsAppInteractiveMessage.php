@@ -6,6 +6,8 @@ use CMText\RichContent\Messages\IRichMessage;
 
 class WhatsAppInteractiveMessage implements IRichMessage
 {
+    use WhatsAppMessageContextTrait;
+
     /**
      * @var WhatsAppInteractiveContent
      */

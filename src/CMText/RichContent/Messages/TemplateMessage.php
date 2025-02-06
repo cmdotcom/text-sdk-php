@@ -2,11 +2,13 @@
 
 namespace CMText\RichContent\Messages;
 
+use CMText\RichContent\Messages\WhatsApp\WhatsAppMessageContextTrait;
 use CMText\RichContent\Templates\TemplateContentBase;
 
 
 class TemplateMessage implements IRichMessage
 {
+    use WhatsAppMessageContextTrait;
 
     public $template;
 
