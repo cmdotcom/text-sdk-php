@@ -181,7 +181,7 @@ class SuggestionsTest extends TestCase
             'test label',
             new \CMText\RichContent\Common\ViewLocationDynamic(
                 'CM HQ',
-                'Konijnenberg 30, Breda',
+                'Konijnenberg 24, Breda',
                 5
             )
         );
