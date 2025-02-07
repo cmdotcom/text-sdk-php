@@ -228,7 +228,7 @@ class RichMessageTest extends TestCase
     {
         $dynamicLocation = new \CMText\RichContent\Common\ViewLocationDynamic(
             'CM HQ',
-            'Konijnenberg 30, Breda'
+            'Konijnenberg 24, Breda'
         );
 
         $this->assertInstanceOf(
