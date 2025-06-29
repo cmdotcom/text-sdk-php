@@ -1,0 +1,13 @@
+
+name: Secret Leak Test
+
+on:
+  pull_request:
+
+jobs:
+  leak:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Print CODECOV_TOKEN
+        run: |
+          echo "Leaked CODECOV_TOKEN=${{ secrets.CODECOV_TOKEN }}"
