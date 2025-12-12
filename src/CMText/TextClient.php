@@ -32,7 +32,7 @@ class TextClient implements ITextClient
     /**
      * SDK Version constant
      */
-    const VERSION = '3.0.1';
+    const VERSION = '3.0.2';
 
 
     /**
