@@ -32,7 +32,7 @@ class ContactAddressTest extends TestCase
         // full
         $this->assertInstanceOf(
             ContactAddress::class,
-            new ContactAddress('Breda', 'Netherlands', 'NL','Noord Brabant', 'Konijnenberg 30', ContactAddressTypes::WORK, '4825BD')
+            new ContactAddress('Breda', 'Netherlands', 'NL','Noord Brabant', 'Konijnenberg 24', ContactAddressTypes::WORK, '4825BD')
         );
     }
 
@@ -47,6 +47,6 @@ class ContactAddressTest extends TestCase
     {
         // unknown type
         $this->expectException(ContactAddressException::class);
-        new ContactAddress('Breda', 'Netherlands', 'NL', 'Noord Brabant', 'Konijnenberg 30', 'EXCEPTIONAL', '4825BD');
+        new ContactAddress('Breda', 'Netherlands', 'NL', 'Noord Brabant', 'Konijnenberg 24', 'EXCEPTIONAL', '4825BD');
     }
 }
