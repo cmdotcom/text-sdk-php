@@ -111,6 +111,7 @@ class TextClient implements ITextClient
                 ],
                 CURLOPT_TIMEOUT => 20,
                 CURLOPT_CONNECTTIMEOUT => 5,
+                CURLOPT_FORBID_REUSE => true,
             ]);
 
             $response = curl_exec($ch);
@@ -124,9 +125,6 @@ class TextClient implements ITextClient
         }catch (\Exception $exception){
             $response = json_encode(['details' => $exception->getMessage()]);
             $statuscode = TextClientStatusCodes::UNKNOWN;
-
-        }finally{
-            curl_close($ch);
         }
 
         $return = new TextClientResult($statuscode, $response);
