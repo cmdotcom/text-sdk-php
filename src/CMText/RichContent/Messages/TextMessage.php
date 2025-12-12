@@ -27,9 +27,9 @@ class TextMessage implements IRichMessage
     /**
      * TextMessage constructor.
      * @param string $Text
-     * @param string $Tag
+     * @param string|null $Tag
      */
-    public function __construct(string $Text, string $Tag = null)
+    public function __construct(string $Text, ?string $Tag = null)
     {
         $this->text = $Text;
         $this->tag = $Tag;
